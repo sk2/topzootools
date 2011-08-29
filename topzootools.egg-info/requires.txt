@@ -1,5 +1,0 @@
-mako
-networkx
-matplotlib
-numpy
-pyparsing
