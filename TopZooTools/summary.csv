@@ -1,0 +1,233 @@
+Name,Network,Date,Type,Layer,Nodes,Edges,Developed,GeoExtent,GeoLocation,Access,Backbone,Commercial,Customer,Testbed,Transit
+Aarnet,AARNET,,REN,IP,19,24,developed,Country,Australia,0,1,0,0,0,0
+Abilene,Abilene,,REN,IP,11,14,,Country,US,0,1,0,0,0,0
+Abvt,AboveNet,,COM,IP,23,31,developed,Country+,"USA, Europe, Japan",0,0,0,0,0,0
+Aconet,ACOnet,,REN,IP,23,31,,Country,Austria,0,1,0,0,0,0
+Agis,AGIS,,COM,IP,25,30,developed,Country,USA,0,0,0,0,0,0
+Ai3,ARPANET,2006-02,REN,IP,10,9,,Continent,Asia-Pacific,0,1,0,0,1,0
+Airtel,Airtel,,COM,IP,16,37,multi,Global,Global,1,1,0,1,0,1
+Ans,ANS,,COM,IP,18,25,developed,Country,USA,0,0,0,0,0,0
+Arn,ARN,,REN,NA,30,29,developing,Country,Algeria,0,1,0,0,0,0
+Arnes,ARNES,,REN,IP,41,65,developed,Country,Slovenia,0,1,0,1,0,0
+Arpanet196912,ARPANET,1969-12,REN,,4,4,developed,Country,United States,0,0,0,0,0,0
+Arpanet19706,ARPANET,1970-06,REN,,9,10,developed,Country,United States,0,0,0,0,0,0
+Arpanet19719,ARPANET,1971-09,REN,,18,22,developed,Country,United States,0,0,0,0,0,0
+Arpanet19723,ARPANET,1972-03,REN,,25,28,developed,Country,United States,0,0,0,0,0,0
+Arpanet19728,ARPANET,1972-08,REN,,29,32,developed,Country,United States,0,0,0,0,0,0
+AsnetAm,ASNET-AM,,REN,IP,65,79,developing,Country,Armenia,0,1,0,1,0,0
+Atmnet,ATMnet,,COM,IP,21,22,developed,Country,USA,0,0,0,0,0,0
+AttMpls,ATT North America,,COM,IP,25,57,developed,Country,USA,0,1,0,1,0,1
+Azrena,Azrena,,REN,IP,22,25,developing,Country,Azerbaijan,0,1,0,1,0,0
+Bandcon,Bandcon ,,COM,IP,22,28,,Country+,"USA, Europe",0,1,0,0,0,0
+Bbnplanet,BBNplanet,,COM,IP,27,28,developed,Country,USA,0,0,0,0,0,0
+Bellcanada,Bell Canada,,COM,IP,48,65,developed,Country+,"Canada, USA",1,1,0,1,0,1
+Bellsouth,Bell South ,,COM,IP,51,66,developed,Country,USA,1,1,0,1,0,1
+Belnet2003,BELNET,2003,REN,IP,23,43,,Country,Belgium,0,1,0,0,0,0
+Belnet2004,BELNET,2004,REN,IP,23,43,,Country,Belgium,0,1,0,0,0,0
+Belnet2005,BELNET,2005,REN,IP,23,44,,Country,Belgium,0,1,0,0,0,0
+Belnet2006,BELNET,2006,REN,IP,23,44,,Country,Belgium,0,1,0,0,0,0
+Belnet2007,BELNET,2007,REN,IP,21,31,,Country,Belgium,0,1,0,0,0,0
+Belnet2008,BELNET,2008,REN,IP,21,31,,Country,Belgium,0,1,0,0,0,0
+Belnet2009,BELNET,2009,REN,IP,21,31,,Country,Belgium,0,1,0,0,0,0
+Belnet2010,BELNET,2010,REN,IP,22,32,developed,Country,Belgium,0,1,0,0,0,0
+BeyondTheNetwork,BTN ,,COM,IP,53,65,,Country,USA,1,1,0,1,0,1
+Bics,BICS,,COM,IP,33,48,developed,Continent,Europe,0,0,0,0,0,0
+Biznet,BizNetworks,,COM,IP,29,33,developing,Country,Indonesia,0,0,0,0,0,0
+Bren,BREN,,REN,Layer 1,37,37,developing,Country,Bulgaria,0,1,0,1,0,0
+BsonetEurope,BSONetworkSolutions,,COM,IP,18,24,developed,Continent,Europe,0,0,0,0,0,0
+BtAsiaPac,BT Asia-Pacific,,COM,IP,20,31,,Continent,Asia-Pacific,0,1,0,1,1,1
+BtEurope,BT Europe,,COM,IP,24,37,,Continent,Europe,0,1,0,1,1,1
+BtLatinAmerica,BT Latin America,,COM,IP,51,50,,Continent,Latin America,0,1,0,1,1,1
+BtNorthAmerica,BT North America,,COM,IP,36,76,,Continent,North America,0,1,0,1,1,1
+Canerie,Canerie,,REN,IP,32,41,developed,Country,Canada,0,1,0,0,0,1
+Carnet,Carnet,,REN,IP,44,43,developing,Country,Croatia,0,1,0,1,0,0
+Cernet,Cernet,,REN,IP,41,59,developing,Country,China,0,1,0,1,0,0
+Cesnet1993,CESNET,1993-01,REN,IP,10,9,developed,Country,Czech Republic,0,1,0,0,1,1
+Cesnet1997,CESNET,1997,REN,IP,13,12,developed,Country,Czech Republic,0,1,0,0,1,1
+Cesnet1999,CESNET,1999,REN,IP,13,12,developed,Country,Czech Republic,0,1,0,0,1,1
+Cesnet2001,CESNET,2001,REN,IP,23,23,developed,Country,Czech Republic,0,1,0,0,1,1
+Cesnet200304,CESNET,2003-04,REN,IP,29,33,developed,Country,Czech Republic,0,1,0,0,1,1
+Cesnet200511,CESNET,2005-11,REN,IP,39,44,developed,Country,Czech Republic,0,1,0,0,1,1
+Cesnet200603,CESNET,2006-03,REN,IP,39,44,developed,Country,Czech Republic,0,1,0,0,1,1
+Cesnet200706,CESNET,2007-06,REN,IP,44,51,developed,Country,Czech Republic,0,1,0,0,1,1
+Chinanet,China Telecom ,,COM,IP,42,66,developing,Country,China,0,1,0,1,0,1
+Claranet,Claranet,,COM,IP,15,18,multi,Continent,Europe,1,1,0,1,0,1
+Cogentco,Cogent ,,COM,IP,197,244,developed,Country+,"USA, Europe",0,1,0,1,0,1
+Colt,Colt Telecom ,,COM,IP,153,185,multi,Continent,Europe,0,1,0,1,0,1
+Columbus,Columbus Networks,,COM,IP,70,85,multi,Continent,Latin America,0,1,0,1,0,1
+Compuserve,Compuserve,,COM,IP,14,17,developed,Country,USA,0,0,0,0,0,0
+CrlNetworkServices,CRL,,COM,IP,33,38,developed,Country,USA,0,0,0,0,0,0
+Cudi,CUDI,,REN,IP,51,52,developing,Country,Mexico,0,1,0,0,0,0
+Cwix,CWIX,,COM,IP,36,41,developed,Country,USA,0,0,0,0,0,0
+Cynet,Cynet,,REN,IP,30,29,developed,Country,Cyprus,0,1,0,0,0,0
+Darkstrand,Darkstrand ,,COM,Simplified Fibre,28,31,developed,Country,USA,0,1,0,1,0,0
+Dataxchange,DataXchange,,COM,IP,6,11,developed,Country,USA,0,0,0,0,0,0
+Deltacom,ITC Deltacom ,,COM,Fibre,113,183,developed,Country,USA,0,1,0,0,0,1
+DeutscheTelekom,Deutsche Telekom ,,COM,IP,39,62,multi,Global,Global,0,1,0,1,0,1
+Dfn,DFN,,REN,IP,51,78,,Country,Germany,0,0,0,0,0,0
+DialtelecomCz,Dial Telecom ,,COM,Fibre,193,151,developed,Country,Czech Republic,1,1,0,1,0,1
+Digex,DIGEX,,COM,IP,31,38,developed,Country,USA,0,0,0,0,0,0
+Easynet,EasyNet ,,COM,IP,19,29,multi,Global,Global,0,1,0,1,0,0
+Eenet,EEnet,,REN,IP,13,16,developing,Country,Estonia,0,1,0,1,0,0
+EliBackbone,Electric Lightwave,,COM,IP,20,30,developed,Country,USA,0,1,0,1,0,1
+Epoch,Epoch,,COM,IP,6,7,developed,Country,USA,0,0,0,0,0,0
+Ernet,ERNET,,REN,IP,30,32,developing,Country,India,0,1,0,1,0,0
+Esnet,ESnet,,REN,IP,68,92,developed,Country,USA,0,1,0,1,0,1
+Eunetworks,euNetworks ,,COM,Simplified Fibre,15,19,multi,Continent,Europe,0,1,0,1,0,1
+Evolink,EvoLink,,COM,IP,37,43,,Country,Bulgaria,0,0,0,0,0,0
+Fatman,FatMan,,REN,IP,17,21,,Region,"Fife and Tayside, UK",0,0,0,0,0,0
+Fccn,FCCN,,REN,IP,23,27,developed,Country,Portugal,0,1,0,1,1,0
+Forthnet,FORTHNET,,COM,IP,62,62,developed,Country,Greece,1,1,0,0,0,1
+Funet,FUNET,,REN,Simplified Fibre,26,31,developed,Country+,Finland,0,1,0,1,0,0
+Gambia,Gambia,,REN,IP,28,28,,Country,Gambia,0,0,0,0,0,0
+Garr199901,GARR,1999-01,REN,IP,17,18,developed,Country,Italy,0,1,0,0,0,1
+Garr199904,GARR,1999-04,REN,IP,24,25,developed,Country,Italy,0,1,0,0,0,1
+Garr199905,GARR,1999-05,REN,IP,24,25,developed,Country,Italy,0,1,0,0,0,1
+Garr200004,GARR,2004-04,REN,IP,23,24,developed,Country,Italy,0,1,0,0,0,1
+Garr200109,GARR,2001-09,REN,IP,23,24,developed,Country,Italy,0,1,0,0,0,1
+Garr200112,GARR,2001-12,REN,IP,25,26,developed,Country,Italy,0,1,0,0,0,1
+Garr200212,GARR,2002-12,REN,IP,28,29,developed,Country,Italy,0,1,0,0,0,1
+Garr200902,GARR,2009-02,REN,IP,54,71,developed,Country,Italy,0,1,0,0,0,1
+Garr200908,GARR,2009-08,REN,IP,54,68,developed,Country,Italy,0,1,0,0,0,1
+Garr200909,GARR,2009-09,REN,IP,55,69,developed,Country,Italy,0,1,0,0,0,1
+Garr200912,GARR,2009-12,REN,IP,54,68,developed,Country,Italy,0,1,0,0,0,1
+Garr201001,GARR,2010-01,REN,IP,54,68,developed,Country,Italy,0,1,0,0,0,1
+Garr201003,GARR,2010-03,REN,IP,54,71,developed,Country,Italy,0,1,0,0,0,1
+Garr201004,GARR,2010-04,REN,IP,54,71,developed,Country,Italy,0,1,0,0,0,1
+Garr201005,GARR,2010-05,REN,IP,55,72,developed,Country,Italy,0,1,0,0,0,1
+Garr201007,GARR,2010-07,REN,IP,55,74,developed,Country,Italy,0,1,0,0,0,1
+Garr201008,GARR,2010-08,REN,IP,55,74,developed,Country,Italy,0,1,0,0,0,1
+Garr201010,GARR,2010-10,REN,IP,56,75,developed,Country,Italy,0,1,0,0,0,1
+Garr201012,GARR,2010-12,REN,IP,56,75,developed,Country,Italy,0,1,0,0,0,1
+Gblnet,GlobalNetRu,,COM,IP,8,7,developed,Continent,Europe,0,0,0,0,0,0
+Geant2001,GEANT,2001-12,REN,IP,27,38,developed,Continent,Europe,0,1,0,0,1,1
+Geant2009,GEANT,2009-02,REN,IP,34,52,developed,Continent,Europe,0,1,0,0,1,1
+Geant2010,GEANT,C,REN,IP,37,57,developed,Continent,Europe,0,1,0,0,1,1
+Getnet,GetNet,,COM,IP,7,8,developed,Country,USA,0,0,0,0,0,0
+Globalcenter,GlobalCenter,,COM,IP,9,36,developed,Country,USA,0,0,0,0,0,0
+Globenet,GlobeNet,,COM,IP,67,112,multi,Continent,Latin America,0,1,0,1,0,1
+Goodnet,GoodNet,,COM,IP,17,31,developed,Country,USA,0,0,0,0,0,0
+Gridnet,GridNet,,COM,IP,9,20,developed,Country,USA,0,0,0,0,0,0
+Grnet,GRnet,,REN,IP,36,46,developed,Country,Greece,0,1,0,1,0,1
+GtsCe,GTS CE,,COM,,150,193,,Continent,Europe,0,0,0,0,0,0
+GtsCzechRepublic,GTS Czech Republic,,COM,,32,33,,Country,Czech Republic,0,0,0,0,0,0
+GtsHungary,GTS Hungary,,COM,,30,31,,Country,Hungary,0,0,0,0,0,0
+GtsPoland,GTS Poland,,COM,,33,37,,Country,Poland,0,0,0,0,0,0
+GtsRomania,GTS Romania,,COM,,21,24,,Country,Romania,0,0,0,0,0,0
+GtsSlovakia,GTS Slovakia,,COM,,35,37,,Country,Slovakia,0,0,0,0,0,0
+Harnet,HARNET,,REN,IP,21,25,developed,Country,Hong Kong,0,1,0,0,0,1
+HiberniaCanada,Hibernia Atlantic (Canada),,COM,IP,13,14,multi,Country,Canda,0,1,0,0,0,1
+HiberniaGlobal,Hibernia Atlantic ,,COM,IP,55,81,multi,Continent+,"North America, Europe",0,1,0,0,0,1
+HiberniaIreland,Hibernia Atlantic (Ireland),,COM,IP,8,8,multi,Country,Ireland,0,1,0,0,0,1
+HiberniaNireland,Hibernia Atlantic (N. Ireland),,COM,IP,18,22,multi,Country,Northern Ireland,0,1,0,0,0,1
+HiberniaUk,Hibernia Atlantic (UK),,COM,IP,15,15,multi,Country,UK,0,1,0,0,0,1
+HiberniaUs,Hibernia Atlantic (US),,COM,IP,22,28,multi,Country,USA,0,1,0,0,0,1
+Highwinds,Highwinds,,COM,IP,18,53,,Global,Global,0,0,0,0,0,0
+HostwayInternational,Hostway International,,COM,IP,16,21,,Global,Global,0,0,0,0,0,0
+HurricaneElectric,Hurricane Electric ,,COM,IP,24,37,multi,Global,Global,0,1,0,1,0,1
+Ibm,IBM,,COM,IP,18,24,developed,Country,USA,0,0,0,0,0,0
+Iij,IIJ,,COM,IP,37,66,developed,Country+,"Japan, USA",0,1,0,1,0,0
+Iinet,IINET ,,COM,IP,31,35,,Country,Australia,1,1,0,1,0,1
+Ilan,ILAN,,REN,IP,14,15,developed,Country,Israel,0,1,0,1,0,0
+Integra,Integra Telecom ,,COM,IP,27,36,developed,Country,USA,0,1,0,1,0,1
+Intellifiber,Intellifiber,,COM,Fibre,73,97,,Country,USA,0,1,0,1,0,1
+Internetmci,InternetMCI,,COM,IP,19,45,developed,Country,USA,0,0,0,0,0,0
+Internode,Internode,,COM,IP,66,78,developed,Global,Global,1,1,0,1,0,1
+Interoute,Interroute ,,COM,Simplified Fibre,110,158,,Continent,Europe,0,1,0,1,0,1
+Intranetwork,ValleyNet,,COM,Fibre,39,53,,Region,"Virginia, Tennessee, West Virginia, Maryland, USA",1,1,0,1,0,1
+Ion,ION,,COM,Fibre,125,150,developed,Region,"New York, USA",0,1,0,1,0,1
+IowaStatewideFiberMap,INS IXC Services ,,COM,Fibre,33,41,,Region,"Iowa, USA",0,1,0,1,0,0
+Iris,IRIS Networks ,,COM,IP,51,64,developed,Region,"Tennessee, USA",0,1,0,1,0,1
+Istar,iSTAR,,COM,IP,23,22,developed,Country,Canada,0,0,0,0,0,0
+Itnet,Itnet,,REN,,11,10,,Country,Ireland,0,0,0,0,0,0
+Janetbackbone,Janet Backbone,,REN,,29,45,,Country,UK,0,0,0,0,0,0
+Janetlense,Janet Lense,,REN,IP,20,40,,Region,"Central South, UK",0,0,0,0,0,0
+Jgn2Plus,JGN2plus-Japan,,REN,IP,18,17,developed,Country,Japan,0,1,0,1,1,0
+Karen,KAREN,,REN,IP,25,30,developed,Country,New Zealand,0,1,0,0,0,0
+Kdl,Kentucky Datalink ,,COM,Fibre,754,899,,Country,USA,0,1,0,1,0,0
+KentmanApr2007,KentMan,2007-04,REN,IP,23,23,developed,Region,"Kent, UK",0,0,0,0,0,0
+KentmanAug2005,KentMan,2005-08,REN,IP,28,29,developed,Region,"Kent, UK",0,0,0,0,0,0
+KentmanFeb2008,KentMan,2008-02,REN,IP,26,28,developed,Region,"Kent, UK",0,0,0,0,0,0
+KentmanJan2011,KentMan,C,REN,IP,38,39,developed,Region,"Kent, UK",0,0,0,0,0,0
+KentmanJul2005,KentMan,2005-07,REN,IP,16,17,developed,Region,"Kent, UK",0,0,0,0,0,0
+Kreonet,KREONET,,REN,IP,13,12,developed,Country,South Korea,0,1,0,0,0,0
+LambdaNet,Lambdanet ,,COM,Fibre,42,46,developed,Country,Germany,0,1,0,1,0,1
+Layer42,Layer42,,COM,IP,6,7,developed,Country,USA,0,0,0,0,0,0
+Litnet,LITNET,,REN,IP,43,43,developing,Country,Lithuania,0,1,0,1,0,0
+Marwan,MARWAN,,REN,NA,16,18,developing,Country,Morocco,0,1,0,1,0,0
+Missouri,Missouri Network Alliance ,,COM,Fibre,67,83,developed,Region,Missouri,0,1,0,1,0,0
+Myren,Myren,,REN,,37,40,,Country,Malaysia,0,0,0,0,0,0
+Napnet,NapNet,,COM,IP,6,7,developed,Country,USA,0,0,0,0,0,0
+Navigata,Navigata ,,COM,IP,13,16,developed,Country,Canada,0,1,0,1,0,0
+Netrail,Netrail,,COM,IP,7,10,developed,Country,USA,0,0,0,0,0,0
+NetworkUsa,Network USA ,,COM,Fibre,35,39,developed,Region,"Louisiana, Texas, USA",0,1,0,0,0,0
+Nextgen,Nextgen ,,COM,Fibre,17,20,,Country,Australia,0,1,0,1,0,1
+Niif,NIIF,,REN,IP,36,41,developing,Country,Hungary,0,1,0,1,0,0
+Noel,Noel Communications ,,COM,IP,19,25,developed,Region,"Washington State, USA",0,1,0,0,0,0
+Nordu1989,NORDU,1989,REN,IP,7,6,developed,Continent,Europe,0,1,0,0,0,0
+Nordu1997,NORDU,1997,REN,IP,14,13,developed,Continent,Europe,0,1,0,0,0,0
+Nordu2005,NORDU,2005,REN,IP,9,10,developed,Continent,Europe,0,1,0,0,0,0
+Nordu2010,NORDU,C,REN,IP,33,45,developed,Continent,Europe,0,1,0,0,0,0
+Nsfcnet,NSFCNET,,REN,IP,10,10,developing,Metro,"Beijing, China",0,1,0,0,1,0
+Nsfnet,NFS,,COM,IP,13,15,developed,Country,USA,0,0,0,0,0,0
+Ntelos,NTELOS ,,COM,Fibre,48,61,,Region,"West Virginia, Virginia, USA",1,1,0,1,0,0
+Ntt,NTT,,COM,,47,214,,Global,Global,0,0,0,0,0,0
+Oteglobe,OTEGlobe ,,COM,Simplified Fibre,93,106,developed,Continent,Europe,0,1,0,0,0,1
+Oxford,Oxford,,COM,Fibre,20,26,developed,Region,"Massachusetts, New Hampshire, Maine, USA",1,1,0,1,0,1
+Pacificwave,Pacific-Wave,,REN,,18,27,,Country,US,0,0,0,0,0,0
+Packetexchange,Packet Exchange,,COM,IP,21,27,multi,Global,Global,0,1,0,1,0,1
+Padi,PADI2,,REN,,15,6,developing,Country,Palestine,0,1,0,0,0,0
+Palmetto,PalmettoNet ,,COM,Fibre,45,70,developed,Region,"North Carolina, South Carolina, USA",0,1,0,0,0,0
+Peer1,peer1,,COM,IP,16,20,multi,Country,Global,0,1,0,1,0,1
+Pern,PERN,,REN,IP,127,129,developing,Country,Pakistan,0,1,0,0,0,0
+Psinet,PsiNet,,COM,IP,24,25,developed,Country,USA,0,0,0,0,0,0
+Psnc,PSNC,,REN,Fibre,36,41,developing,Country,Poland,0,1,0,1,0,0
+Quest,Quest ,,COM,IP,20,31,developed,Continent,Asia-Pacific,0,1,0,1,0,1
+RedBestel,Bestel ,,COM,Fibre,84,101,,Country,Mexico,0,1,0,1,0,1
+Rediris,RedIris,,REN,,19,32,,Country,Spain,0,0,0,0,0,0
+Renater1999,Renater,1999-07,REN,IP,24,23,developed,Country,France,0,0,0,0,0,0
+Renater2001,Renater,2001-04,REN,IP,24,27,developed,Country,France,0,0,0,0,0,0
+Renater2004,Renater,1999-07,REN,IP,30,36,developed,Country,France,0,0,0,0,0,0
+Renater2006,Renater,2006-11,REN,IP,33,43,developed,Country,France,0,0,0,0,0,0
+Renater2008,Renater,2008-11,REN,IP,33,43,developed,Country,France,0,0,0,0,0,0
+Renater2010,Renater,2010-08,REN,IP,43,56,developed,Country,France,0,0,0,0,0,0
+Restena,Restena,,REN,,19,21,,Country,Luxembourg,0,0,0,0,0,0
+Reuna,Reuna,,REN,,37,36,,Country,Chile,0,0,0,0,0,0
+Rhnet,RHnet,,REN,IP,16,18,developed,Country,Iceland,0,1,0,0,0,0
+Rnp,RNP,,REN,IP,31,34,developing,Country,Brazil,0,1,0,0,0,0
+Sago,Sago,,COM,Fibre,18,17,developed,Region,"Florida and Georgia, USA",0,1,0,1,0,0
+Sanet,SANET,,REN,IP,43,45,developed,Country,Slovakia,0,1,0,1,0,0
+Sanren,Sanren,,REN,,7,7,,Country,South Africa,0,0,0,0,0,0
+Savvis,Savvis,,COM,IP,19,20,developed,Country,USA,0,0,0,0,0,0
+Shentel,Shentel ,,COM,Fibre,28,35,developed,Region,"Maryland, West Virginia, Virginia, USA",1,1,0,1,0,0
+Sinet,Sinet,,REN,IP,74,76,developed,Country,Japan,0,1,0,0,0,0
+Singaren,Singaren,,REN,IP,11,10,developed,Country,Singapore,0,1,0,0,0,0
+Spiralight,SpiraLight,,COM,Fibre,15,16,developed,Region,"Wisconsin, USA",0,1,0,0,0,0
+Sprint,Sprint,,COM,IP,11,18,developed,Country,USA,0,0,0,0,0,0
+Sunet,OPTOSUNET,,REN,Fibre,26,49,developed,Country,Sweden,0,1,0,0,0,0
+Surfnet,SURFNET,,REN,NA,50,73,developed,Unavailable,Netherlands,0,1,0,1,1,0
+Switch,SWITCH,,REN,Fibre,74,91,developed,Country,Switzerland,0,1,0,1,0,1
+Syringa,Syringa Networks,,COM,Fibre,74,74,developed,Region,"Idaho, USA",0,1,0,1,0,0
+TLex,T-lex,,REN,Layer 2,12,16,developed,Metro,"Tokyo, Japan",0,1,0,0,0,1
+TataNld,TATA,,COM,Telephone,145,194,multi,Country,India,1,1,0,1,0,1
+Telcove,Tecove (level3),,COM,IP,73,70,developed,Country,USA,0,1,0,1,0,1
+Telecomserbia,TelecomSerbia,,COM,IP,6,6,,Country+,"Serbia, Montenegro",0,0,0,0,0,0
+Tinet,Tinet,,COM,IP,53,89,multi,Global,Global,0,1,0,0,0,1
+Tw,TW Telecom,,COM,IP,76,118,developed,Country,USA,0,1,0,1,0,1
+Twaren,TWAREN,,REN,IP,20,20,developed,Country,Taiwan,0,1,0,0,1,1
+Ulaknet,ULAKNET,,REN,IP,82,82,developing,Country,Turkey,0,1,0,0,0,0
+UniC,Forskningsnettet,,REN,IP,25,29,developed,Country,Denmark,0,1,0,1,0,0
+Uninet,UniNet,,REN,IP,13,25,developing,Continent,Asia-Pacific,0,1,0,0,0,0
+Uninett,Uninett,,REN,IP,74,97,developed,Country,Norway,0,1,0,0,0,0
+Uran,URAN,,REN,IP,24,24,developing,Country,Ukraine,0,1,0,1,0,0
+UsCarrier,US Carrier,,COM,Fibre,158,189,developed,Region,"Georgia, Alabama, Florida, USA",0,1,0,1,0,0
+UsSignal,US Signal,,COM,Fibre,63,79,developed,Country,USA,0,1,0,0,0,0
+Uunet,UUNET,,COM,IP,49,84,developed,Country,USA,0,0,0,0,0,0
+Vinaren,VinaREN,,REN,,25,26,developing,Country,Vietnam,0,1,0,0,0,0
+VisionNet,Vision Net,,COM,Fibre,24,23,developed,Region,"Montana, USA",0,0,0,0,0,0
+VtlWavenet2008,Viatel,2008,COM,Fibre,88,92,multi,Continent,Europe,0,1,0,1,0,1
+VtlWavenet2011,Viatel,C,COM,Fibre,92,96,multi,Continent,Europe,0,1,0,1,0,1
+WideJpn,WIDE,,REN,IP,30,33,developed,Country,Japan,0,1,0,0,1,1
+Xeex,Xeex,,COM,IP,24,34,developed,Country,USA,0,0,0,0,0,0
+Xspedius,Xspedius,,COM,IP,34,49,developed,Country,USA,1,1,0,1,0,0
+York,YorkDataServices,,COM,IP,23,24,developed,Country,UK,0,0,0,0,0,0

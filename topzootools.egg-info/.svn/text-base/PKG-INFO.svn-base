@@ -1,0 +1,21 @@
+Metadata-Version: 1.0
+Name: topzootools
+Version: 0.2.1
+Summary: Processing and conversion tools for Internet Topology Zoo
+Home-page: http://www.topology-zoo.org
+Author: Simon Knight
+Author-email: simon.knight@adelaide.edu.au
+License: UNKNOWN
+Description: Processing and conversion tools for Internet Topology Zoo
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: System Administrators
+Classifier: Intended Audience :: Telecommunications Industry
+Classifier: License :: Other/Proprietary License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Topic :: System :: Networking
+Classifier: Topic :: System :: Software Distribution
+Classifier: Topic :: Scientific/Engineering :: Mathematics

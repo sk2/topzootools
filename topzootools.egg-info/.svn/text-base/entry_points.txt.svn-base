@@ -1,0 +1,5 @@
+[console_scripts]
+zooconvert = TopZooTools.convert:main
+yed2zoo = TopZooTools.yed2zoo:main
+zooplot = TopZooTools.geoploty:main
+

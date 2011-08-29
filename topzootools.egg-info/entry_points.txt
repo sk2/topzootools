@@ -1,0 +1,9 @@
+[console_scripts]
+yed2zoo = TopZooTools.yed2zoo:main
+rocketfuel2zoo = TopZooTools.rocketfuel2zoo:main
+zooconvert = TopZooTools.convert:main
+zooplot = TopZooTools.geoplot:main
+zoogeocode = TopZooTools.geocoder:main
+zoofilter = TopZooTools.filter:main
+zoostats = TopZooTools.zoostats:main
+

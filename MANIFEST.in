@@ -1,0 +1,12 @@
+include setup.py
+include README.txt            
+
+exclude TopZooTools/*.py
+include TopZooTools/converter.py
+include TopZooTools/geoplot.py
+include TopZooTools/yed2zoo.py
+include TopZooTools/zoostats.py      
+include TopZooTools/geocoder.py
+include TopZooTools/rocketfuel2zoo.py
+                                  
+exclude TopZooTools/cache.data
