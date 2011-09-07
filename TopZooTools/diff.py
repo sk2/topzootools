@@ -71,16 +71,19 @@ def compare(G_a, G_b):
     names_common = set(names_a) & set(names_b)
     #print sorted(names_a)
     #print sorted(names_b)
-    print names_diff
+    #print names_diff
 
     # Compare node labels
-    print ",".join(d['label'] for n,d in G_a.nodes(data=True))
-    print ",".join(d['label'] for n,d in G_b.nodes(data=True))
+    #print ",".join(d['label'] for n,d in G_a.nodes(data=True))
+    #print ",".join(d['label'] for n,d in G_b.nodes(data=True))
     labels_diff = [n for n in names_common 
                    if G_a.node[n]['label'] != G_b.node[n]['label']]
+    for n in names_common:
+        if G_a.node[n]['label'] != G_b.node[n]['label']:
+            print "diff", G_a.node[n]['label'], " ", G_b.node[n]['label']
+    if len(labels_diff):
+        print "Different label nodes:", labels_diff
 
-    print "Different label nodes:", labels_diff
-    #pprint.pprint(G_a.nodes(data=True))
 
     pprint.pprint(dict(statistics))
 

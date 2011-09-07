@@ -10,3 +10,4 @@
 *.svn
 dist/*
 *.swp
+*.egg-info/*

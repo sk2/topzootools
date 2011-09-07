@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup (
      name = "topzootools",
-     version = "0.3.12",
+     version = "0.3.13",
      description = "Processing and conversion tools for Internet Topology Zoo",
      long_description="Processing and conversion tools for Internet Topology Zoo",
                
@@ -11,7 +11,7 @@ setup (
      entry_points = {
          'console_scripts': [
              'yed2zoo = TopZooTools.yed2zoo:main',    
-             'zooconvert = TopZooTools.convert:main',         
+             'zooconvert = TopZooTools.converter:main',         
              'zooplot = TopZooTools.geoplot:main',
              'zoofilter = TopZooTools.filter:main',
              'zoostats= TopZooTools.zoostats:main',
