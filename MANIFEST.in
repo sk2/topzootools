@@ -3,6 +3,7 @@ include README.txt
 
 exclude TopZooTools/*.py
 include TopZooTools/converter.py
+include TopZooTools/__init__.py
 include TopZooTools/geoplot.py
 include TopZooTools/yed2zoo.py
 include TopZooTools/zoostats.py      
