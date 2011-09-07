@@ -1,0 +1,12 @@
+*.log
+*.log.*
+*.zip
+*.csv
+*.graphml
+.DS_store
+*.svn/
+*.pyc
+*.data
+*.svn
+dist/*
+*.swp

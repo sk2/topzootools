@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
 import networkx as nx
-
 import os
 import glob
 import sys
