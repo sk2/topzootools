@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup (
      name = "topzootools",
-     version = "0.3.17",
+     version = "0.3.18",
      description = "Processing and conversion tools for Internet Topology Zoo",
      long_description="Processing and conversion tools for Internet Topology Zoo",
                

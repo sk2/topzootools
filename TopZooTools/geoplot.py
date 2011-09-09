@@ -567,7 +567,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         elif G.graph.get('Network') == 'European NRENs':
             m.fillcontinents(color='#9ACEEB')
         else:
-            m.fillcontinents(color='0.95')
+            m.fillcontinents(color='0.85')
 
         #m.fillcontinents()
 
@@ -599,9 +599,9 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         country_color = '#666666'
         #country_color = '#AAAAAA'
         #country_color = '#DDDDDD'
-        if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
+        if G.graph.get('Network') == 'GEANT':
             default_edge_color = '0.3'
-        elif 'Network' in G.graph and G.graph['Network'] == 'European NRENs':
+        elif G.graph.get('Network') == 'European NRENs':
             default_edge_color = '0.1'
 
     if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
