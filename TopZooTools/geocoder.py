@@ -518,7 +518,7 @@ class Geocoder(object):
                 # The first bit of code keeps only letters (ie remove numbers)
                 # and is faster than using a regex
                 continue
-            elif nodedata['Internal'] == False:
+            elif nodedata.get('Internal') is False:
                 # Skip ext nodes as likely to be networks rather than places
                 continue
             else:

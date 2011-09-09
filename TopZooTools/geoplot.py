@@ -144,6 +144,8 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                pickle_dir = None,
                label_font_size=10,
                no_watermark = False,
+               show_figure=False,
+               edge_font_size =3,
                edge_label_attribute=False, pdf=False, png=False):
 
     output_path = os.path.abspath(output_path)
@@ -446,7 +448,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     
     # manual boundaries for geant
     # left, bottom, right, top
-    if G.graph['Network'] == 'European NRENs':
+    if G.graph.get('Network') == 'European NRENs':
         (llcrnrlon, llcrnrlat, urcrnrlon, urcrnrlat) = (-6, 35, 35, 58)
 
     # over write if specified manually
@@ -562,7 +564,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         # continent fill
         if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
             m.fillcontinents(color='#9ACEEB')
-        elif G.graph['Network'] == 'European NRENs':
+        elif G.graph.get('Network') == 'European NRENs':
             m.fillcontinents(color='#9ACEEB')
         else:
             m.fillcontinents(color='0.95')
@@ -594,8 +596,8 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         #colormap = cm.autumn
         #colormap = cm.winter
         #colormap = cm.summer
-        #country_color = '#666666'
-        country_color = '#AAAAAA'
+        country_color = '#666666'
+        #country_color = '#AAAAAA'
         #country_color = '#DDDDDD'
         if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
             default_edge_color = '0.3'
@@ -1078,7 +1080,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                     fc=(1.0, 1.0, 1.0, 0.5),
                     )       
         
-        nx.draw_networkx_edge_labels(G, pos, edge_labels, font_size=3,
+        nx.draw_networkx_edge_labels(G, pos, edge_labels, font_size=edge_font_size,
                                     bbox = bbox)
 
         """
@@ -1164,7 +1166,10 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                     pad_inches=0.001,
                 )
 
-    plt.close()
+    if show_figure:
+        plt.show()
+
+    #plt.close()
 
 
 #TODO: replace magic numbers with constants

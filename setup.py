@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup (
      name = "topzootools",
-     version = "0.3.16",
+     version = "0.3.17",
      description = "Processing and conversion tools for Internet Topology Zoo",
      long_description="Processing and conversion tools for Internet Topology Zoo",
                
@@ -27,11 +27,13 @@ setup (
     
         #TODO: update this package data to reflect all scripts called
      package_data = {'': ['converter.py', 'geoplot.py', 'yed2zoo.py',
-                          'rocketfuel2zoo.py', 'filter.py', 'geocoder.py']},
+         'geocoder.py',
+         'rocketfuel2zoo.py', 'filter.py', 'geocoder.py']},
      
      install_requires=['mako', 'networkx', 
          #'matplotlib', #'numpy', 
-'pyparsing'],
+         'pyparsing'],
+
      classifiers = [
          "Programming Language :: Python",
          "Development Status :: 3 - Alpha",
