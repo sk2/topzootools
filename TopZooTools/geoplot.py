@@ -94,7 +94,6 @@ opt.add_option('--image_scale',
                "default 0 (none), 1 is high",
                type="float", default=0)
 
-
 opt.add_option('--label_font_size', 
                help="Size to plot nodes labels as",
                type="float", default=10)
@@ -120,7 +119,7 @@ options, args = opt.parse_args()
 #TODO: make mark outliers handle great circle - or disable option
 # and warn user
 
-#Todo; allow user to plot using normal scatter plot, ie not only basemap
+#TODO: allow user to plot using normal scatter plot, ie not only basemap
 #TODO: add option to mark outliers
 
 #TODO: split into functions
@@ -134,6 +133,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                node_size = 10, line_width = 1,
                manual_image_scale = 0,
                pickle_dir = None,
+               country_color = "#666666",
                label_font_size=10,
                no_watermark = False,
                show_figure=False,
@@ -141,6 +141,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                edge_label_attribute=False, pdf=False, png=False):
 
     output_path = os.path.abspath(output_path)
+    print "output path is ", output_path
     basemap_resolution_levels = {
         0: None,
         1: 'c',
@@ -159,6 +160,8 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     #to come from network name
     #TODO: clean up this handling when called programatically
     network_name = G.name
+    if network_name == "":
+        network_name = "network"  #default name
     #TODO: return labels_all or modify/append to reference if passed as
     #parameter as this is needed for heatmap labels
     labels_all = []
@@ -333,13 +336,15 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
 
     #TODO: check why no showing up as multiple inferred hyperedges in Uninett
     if explode_scale:
+        print "explode scale is ", explode_scale
         lat_long = defaultdict(list)
         for n, data in G.nodes(data=True):  
             lat_long[(data['Latitude'], data['Longitude'])].append(n)
         coincident_nodes = [n for n in lat_long.values() if len(n) > 1]
+        print "coincident_nodes are ", coincident_nodes
         lons = [lon for (lat, lon) in lat_long.keys()]
         # Shrink explode scale
-        scale_factor = explode_scale/100 * (max(lons) - min(lons))
+        scale_factor = float(explode_scale)/100 * (max(lons) - min(lons))
         for nodes in coincident_nodes:
             # Add to the lat/long accordingly
             # Keep first node in same place
@@ -540,8 +545,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         for n, data in G.nodes(data = True):
             print "%s: %s" % (n, data['label'])
 
-    blue_marble_scale = 0.7
-    blue_marble_scale = 1
     if use_bluemarble:
         m.bluemarble(scale = image_scale)
         #m.bluemarble()
@@ -559,7 +562,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         elif G.graph.get('Network') == 'European NRENs':
             m.fillcontinents(color='#9ACEEB')
         else:
-            m.fillcontinents(color='0.85')
+            m.fillcontinents(color=country_color)
 
         #m.fillcontinents()
 
@@ -572,7 +575,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         caption_color = 'w'
         colormap = cm.autumn
         #colormap = cm.jet
-        country_color = '#666666'
+        #country_color = '#666666'
     else:
         if use_labels:
             node_color = 'gray'
@@ -588,7 +591,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         #colormap = cm.autumn
         #colormap = cm.winter
         #colormap = cm.summer
-        country_color = '#666666'
         #country_color = '#AAAAAA'
         #country_color = '#DDDDDD'
         if G.graph.get('Network') == 'GEANT':
@@ -720,7 +722,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                     or G.node[dst]['label'] in edge_skips_nodes):
                     continue
 
-
             lon1 = G.node[src]['Longitude']
             lat1 = G.node[src]['Latitude']
             lon2 = G.node[dst]['Longitude']
@@ -742,7 +743,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                 zorder = data['zorder']
             else:
                 zorder = 1
-
             
             if 'edge_width' in data:
                 # Multiplier not absolute width
@@ -750,7 +750,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                 curr_line_width = line_width * int(data['edge_width'])
             else:
                 curr_line_width = line_width
-
 
             # Mark inferred links clearl
             linestyle = 'solid'
@@ -841,8 +840,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
 
     # Use non integer zorder for the edges, as netx draw forces zorder to be
     # 2 for nodes
-
-
 
     # Faded background node for glow-like effect
     """
@@ -1069,7 +1066,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         # by setting alpha to zero
         bbox = dict(boxstyle='round',
                     ec=(1.0, 1.0, 1.0, 0),
-                    fc=(1.0, 1.0, 1.0, 0.5),
+                    fc=(1.0, 1.0, 1.0, 0.0),
                     )       
         
         nx.draw_networkx_edge_labels(G, pos, edge_labels, font_size=edge_font_size,
@@ -1094,7 +1091,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     if title:
         network_date = ""
         network_date = G.graph.get('NetworkDate').replace("_", " ")
-        geolocation = G.graph.get("GeoLocation")
         place_date_string = "%s\n%s" % (G.graph.get("GeoLocation"),
                                         network_date)
 
@@ -1117,8 +1113,11 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     #logger.info( "Plotting to %s " % out_file)
     # legend code from
     # http://www.mail-archive.com/matplotlib-users@lists.sourceforge.net/msg15262.html
+    print pdf
     if pdf:
+        print "PDF IS TRUE"
         plt_file_pdf = open(out_file + ".pdf", "w")
+        print "save to ", plt_file_pdf
         #logger.info( "Plotting %s.pdf" % out_file)
         if render_legend:
             plt.savefig( plt_file_pdf, format = 'pdf',
