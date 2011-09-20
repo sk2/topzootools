@@ -7,21 +7,13 @@ import os
 import glob
 import optparse
 import sys
-import pprint as pp
-import calendar
 import math
-import random
-import cPickle
 
 from collections import defaultdict
-import re
 import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib.colors as colors
 from matplotlib.font_manager import FontProperties
-
-import matplotlib.font_manager as mpfm
 
 __all__ = ['plot_graph']
 
