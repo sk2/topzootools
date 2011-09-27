@@ -8,6 +8,7 @@ import sys
 
 #import numpy as np
 
+import pkg_resources
 import csv
 import re
 import optparse
@@ -335,8 +336,7 @@ def main():
         path = os.path.abspath(path)
 
     git_version = get_git_version(path)
-    print "git version is ", git_version
-    sys.exit(0)
+    topzootools_version = pkg_resources.get_distribution("TopZooTools").version
 
     if options.output_dir:
         output_path = options.output_dir
@@ -431,8 +431,9 @@ def main():
         network_label_clean = network_label.replace("&", "and")
 
         # Set other graph attributes
+        graph.graph['SourceGitVersion'] = git_version
         graph.graph['Creator'] = "Topology Zoo Toolset"
-        graph.graph['Version'] = "1.0"
+        graph.graph['ToolsetVersion'] = topzootools_version
 
         graph.graph['label'] = network_label_clean
 

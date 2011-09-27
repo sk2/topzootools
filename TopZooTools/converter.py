@@ -19,7 +19,6 @@ import zipfile
 import cPickle
 from collections import defaultdict
 
-
 def continent_breakdown(geo_locations_by_extent):
     retval = {'GlCPlus': [], 'AP': [], 'Eur': [], 'NA/LA': []}
 
@@ -258,7 +257,6 @@ def main():
     options = opt.parse_args()[0]
 
     template_dir =  resource_filename("TopZooTools","templates")
-    print template_dir
     lookup = TemplateLookup(directories=[ template_dir ],
             module_directory= "/tmp/mako_modules",
             #cache_type='memory',
@@ -476,6 +474,8 @@ def main():
             node_dict['Testbed'] = data['Testbed']
             node_dict['Transit'] = data['Transit']
             node_dict['Type'] = data['Type']
+            node_dict['SourceGitVersion'] = data['SourceGitVersion']
+            node_dict['ToolsetVersion'] = data['ToolsetVersion']
 
             if network_list.count(network) > 1:
                 # Multiple observations of this network, record date
