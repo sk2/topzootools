@@ -343,10 +343,20 @@ def main():
         if (options.html or options.matlab_keys or options.gallery or
             options.summary_csv):
             summary_data[network_name] = {} 
+            classification_types = set(["Testbed", "Customer", "Backbone", "Transit", "IX",
+                "Commercial"])
+            classification = ""
 
             for key, val in graph.graph.items():
+                if key in classification_types and val == True:
+# append, eg if Backbone then add "Backbone" to classification
+                    classification += ", %s" %  key
                 # And also store in html data
                 summary_data[network_name][key] = val
+
+            summary_data[network_name]['Classification'] = classification
+
+
             # also some graph statistics
             summary_data[network_name]['Nodes'] = graph.number_of_nodes()
             summary_data[network_name]['Edges'] = graph.number_of_edges()
