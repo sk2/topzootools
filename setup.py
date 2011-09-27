@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup (
      name = "topzootools",
-     version = "0.3.22",
+     version = "0.3.24",
      description = "Processing and conversion tools for Internet Topology Zoo",
      long_description="Processing and conversion tools for Internet Topology Zoo",
                
@@ -27,7 +27,7 @@ setup (
     
         #TODO: update this package data to reflect all scripts called
      package_data = {'': ['converter.py', 'geoplot.py', 'yed2zoo.py',
-         'geocoder.py',
+         'geocoder.py', "templates/*.mako",
          'rocketfuel2zoo.py', 'filter.py', 'geocoder.py']},
      
      install_requires=['mako', 'networkx', 

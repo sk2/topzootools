@@ -473,10 +473,7 @@ def main():
                 node_dict['Date'] = data['NetworkDate']
             dw.writerow(node_dict)
 
-
-
         # write csv to output directory
-
 
     # Pre-processing for html and gallery as they both use these dictionaries
     if options.html:
