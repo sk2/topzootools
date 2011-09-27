@@ -141,7 +141,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                edge_label_attribute=False, pdf=False, png=False):
 
     output_path = os.path.abspath(output_path)
-    print "output path is ", output_path
     basemap_resolution_levels = {
         0: None,
         1: 'c',
@@ -336,12 +335,10 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
 
     #TODO: check why no showing up as multiple inferred hyperedges in Uninett
     if explode_scale:
-        print "explode scale is ", explode_scale
         lat_long = defaultdict(list)
         for n, data in G.nodes(data=True):  
             lat_long[(data['Latitude'], data['Longitude'])].append(n)
         coincident_nodes = [n for n in lat_long.values() if len(n) > 1]
-        print "coincident_nodes are ", coincident_nodes
         lons = [lon for (lat, lon) in lat_long.keys()]
         # Shrink explode scale
         scale_factor = float(explode_scale)/100 * (max(lons) - min(lons))
@@ -1113,11 +1110,8 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     #logger.info( "Plotting to %s " % out_file)
     # legend code from
     # http://www.mail-archive.com/matplotlib-users@lists.sourceforge.net/msg15262.html
-    print pdf
     if pdf:
-        print "PDF IS TRUE"
         plt_file_pdf = open(out_file + ".pdf", "w")
-        print "save to ", plt_file_pdf
         #logger.info( "Plotting %s.pdf" % out_file)
         if render_legend:
             plt.savefig( plt_file_pdf, format = 'pdf',
