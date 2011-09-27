@@ -354,7 +354,7 @@ def main():
                 # And also store in html data
                 summary_data[network_name][key] = val
 
-            summary_data[network_name]['Classification'] = ", ".join(classification)
+            summary_data[network_name]['Classification'] = ", ".join(sorted(classification))
 
             # also some graph statistics
             summary_data[network_name]['Nodes'] = graph.number_of_nodes()
