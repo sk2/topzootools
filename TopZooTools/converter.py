@@ -345,17 +345,16 @@ def main():
             summary_data[network_name] = {} 
             classification_types = set(["Testbed", "Customer", "Backbone", "Transit", "IX",
                 "Commercial"])
-            classification = ""
+            classification = []
 
             for key, val in graph.graph.items():
                 if key in classification_types and val == True:
 # append, eg if Backbone then add "Backbone" to classification
-                    classification += ", %s" %  key
+                    classification.append(key)
                 # And also store in html data
                 summary_data[network_name][key] = val
 
-            summary_data[network_name]['Classification'] = classification
-
+            summary_data[network_name]['Classification'] = ", ".join(classification)
 
             # also some graph statistics
             summary_data[network_name]['Nodes'] = graph.number_of_nodes()
