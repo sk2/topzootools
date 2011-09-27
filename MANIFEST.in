@@ -9,5 +9,6 @@ include TopZooTools/yed2zoo.py
 include TopZooTools/zoostats.py      
 include TopZooTools/geocoder.py
 include TopZooTools/rocketfuel2zoo.py
+include TopZooTools/templates/*.mako
                                   
 exclude TopZooTools/cache.data
