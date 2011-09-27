@@ -13,6 +13,8 @@ import csv
 import pprint
 
 from mako.lookup import TemplateLookup    
+from pkg_resources import resource_filename
+
 import zipfile
 import cPickle
 from collections import defaultdict
@@ -217,7 +219,6 @@ def main():
     opt.add_option('--output_dir', '-o', help="process directory")
     opt.add_option('--map_dir', help="geoplot map input dir for gallery")
 
-
     # Graph options
     opt.add_option('--single_edge', action="store_true",
                    default=False, help="Reduce multi edges to single edge")
@@ -255,6 +256,14 @@ def main():
                    help="HTML summary")
     opt.add_option('--skip_type',  help="List of types to skip")
     options = opt.parse_args()[0]
+
+    template_dir =  resource_filename("TopZooTools","templates")
+    print template_dir
+    lookup = TemplateLookup(directories=[ template_dir ],
+            module_directory= "/tmp/mako_modules",
+            #cache_type='memory',
+            #cache_enabled=True,
+            )
 
     network_files = []
     if options.file:
@@ -477,6 +486,7 @@ def main():
                 if key not in data:
                     summary_data[network][key] = ""
 
+    gallery_data = []
     if options.gallery and options.map_dir:
         # See which networks have an associated map
         gallery_data = [] 
@@ -492,8 +502,6 @@ def main():
         #TODO: if matlab, plot, gml, graphml etc set, then provide hyperlink 
         date = strftime("%A %d %B %Y")
 
-        lookup = TemplateLookup(directories=[ "templates" ],
-                                module_directory="/tmp/mako_modules")       
         html_template = lookup.get_template("html.mako")
         f_html = open("{0}/dataset.html".format(output_path), "w")
         f_html.write(html_template.render(
@@ -510,8 +518,6 @@ def main():
             date = strftime("%A %d %B %Y")          
             #TODO: if matlab, plot, gml, graphml etc set, then provide hyperlink 
             # Set any missing entries to blank
-            lookup = TemplateLookup(directories=[ "templates" ],
-                                    module_directory="/tmp/mako_modules")       
             gallery_template = lookup.get_template("gallery.mako")
             f_html = open("{0}/gallery.html".format(output_path), "w")
             f_html.write(gallery_template.render(
