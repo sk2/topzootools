@@ -6,7 +6,6 @@ import os
 import glob
 import sys
 
-
 #import numpy as np
 
 import csv
@@ -304,6 +303,18 @@ def extract_svn_version(path):
             next_line = True
     f_entries.close()
 
+
+def get_git_version(path):
+    import subprocess
+    command = ["git", "rev-parse", "--short", "HEAD"]
+    p = subprocess.Popen(command,
+                     stdin = subprocess.PIPE,
+                     stdout = subprocess.PIPE,
+                     cwd=path,
+                    )
+    line = p.stdout.readlines()[0]
+    return line.strip()
+
 def main():
     network_files = []
     if options.file:
@@ -322,6 +333,10 @@ def main():
         path = os.path.split(options.file)[0]
         # Get full path - don't want to create in root dir
         path = os.path.abspath(path)
+
+    git_version = get_git_version(path)
+    print "git version is ", git_version
+    sys.exit(0)
 
     if options.output_dir:
         output_path = options.output_dir

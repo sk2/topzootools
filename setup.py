@@ -27,7 +27,7 @@ setup (
     
         #TODO: update this package data to reflect all scripts called
      package_data = {'': ['converter.py', 'geoplot.py', 'yed2zoo.py',
-         'geocoder.py', "templates/*.mako",
+         'geocoder.py', "templates/*.mako", "gitversion.py",
          'rocketfuel2zoo.py', 'filter.py', 'geocoder.py']},
      
      install_requires=['mako', 'networkx', 
