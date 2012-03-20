@@ -29,11 +29,9 @@ import urllib2
 
 #TODO: move cache and country handling into script
 
-
 #ToDO: fix logging handling now in seperate script
 import logging
 import logging.handlers
-
 
 #TODO: make logging passed in for Class for geocode
 
@@ -48,7 +46,6 @@ class FileGetter(threading.Thread):
         self.has_exceeded_count = False
         self.logger = logging.getLogger("geocoder")
         threading.Thread.__init__(self)
-        
 
     def get_result(self):
         return self.result
@@ -563,7 +560,7 @@ class Geocoder(object):
             # Generate lookup URLs
             urls_to_fetch = {}
             if len(urls_to_fetch) > 0:
-                self.logger.debug("Lookup iteration %s"%i)
+                self.logger.debug("Lookup iteration %s" % i)
             for node in need_geocode:
                 url = create_url(node, i)
                 use_from_cache = False

@@ -1050,6 +1050,9 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                                 font_size = label_font_size,
                                 font_color = font_color,
                                )
+
+        #TODO: rewrite using 
+#edge_labels = dict( ((s,t), d.get(edge_label_attribute)) for s,t,d in G.edges(data=True))
     if edge_label_attribute:
         edge_labels = {}
         for s, t, d in G.edges_iter(data=True):
