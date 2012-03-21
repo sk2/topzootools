@@ -2,33 +2,42 @@ graph [
   DateObtained "21/10/10"
   GeoLocation "Italy"
   GeoExtent "Country"
-  Network "GARR: 2010_12 vs 2010_04"
+  DateModifier "="
+  Customer 0
+  Network "GARR: 2010_04 vs 2010_12"
+  IX 0
   Provenance "Primary"
   Note "New GARR-X functionality roll-out, experimental or testbed? Names from http://www.noc.garr.it/mappe/ and http://www.garr.it/stampaGARR/netbul/netbul0710.php CO unclear, appears to be Milan-Colombo PoP"
   Source "http://www.garr.it/index.php/rete/infrastruttura-di-rete/mappa-della-rete/48"
   Version "1.0"
+  DateMonth "04"
+  DateYear "2010"
   DateType "Historic"
-  Type "REN"
-  Backbone 1
-  Commercial 0
-  label "Garr201012"
-  ToolsetVersion "0.3.24dev-20110927"
-  Customer 0
-  IX 0
-  SourceGitVersion "ad2c36c"
-  DateModifier "="
-  DateMonth "12"
   LastAccess "21/10/10"
   Access 0
   Layer "IP"
   name "()"
   Creator "Topology Zoo Toolset"
-  Developed 1
-  Transit 1
-  NetworkDate "2010_12"
-  DateYear "2010"
+  Type "REN"
+  SourceGitVersion "ad2c36c"
+  Backbone 1
+  Commercial 0
+  NetworkDate "2010_04"
+  label "Garr201004"
   LastProcessed "2011_09_01"
   Testbed 0
+  Developed 1
+  ToolsetVersion "0.3.24dev-20110927"
+  Transit 1
+  node [
+    id 43
+    label "FG"
+    Internal 1
+    delta "modified"
+    Latitude 41.46093
+    Country "Italy"
+    Longitude 15.54925
+  ]
   node [
     id 11
     label "TIX"
@@ -36,7 +45,7 @@ graph [
     Internal 0
   ]
   node [
-    id 44
+    id 42
     label "BA"
     Internal 1
     delta "modified"
@@ -54,13 +63,13 @@ graph [
     Longitude 11.33875
   ]
   node [
-    id 39
-    label "FRA"
+    id 13
+    label "MI-3"
     Internal 1
     delta "modified"
-    Latitude 41.81632
+    Latitude 45.46427
     Country "Italy"
-    Longitude 12.66868
+    Longitude 9.18951
   ]
   node [
     id 2
@@ -71,7 +80,7 @@ graph [
   node [
     id 22
     label "MIX"
-    delta "removed"
+    delta "added"
     Internal 0
   ]
   node [
@@ -84,16 +93,16 @@ graph [
     Longitude 13.78
   ]
   node [
-    id 45
-    label "FG"
+    id 48
+    label "BS"
     Internal 1
-    delta "modified"
-    Latitude 41.46093
+    delta "added"
+    Latitude 45.52478
     Country "Italy"
-    Longitude 15.54925
+    Longitude 10.22727
   ]
   node [
-    id 25
+    id 24
     label "FI"
     Internal 1
     delta "modified"
@@ -105,7 +114,7 @@ graph [
     id 33
     label "MI-4"
     Internal 1
-    delta "removed"
+    delta "added"
     Latitude 45.46427
     Country "Italy"
     Longitude 9.18951
@@ -120,7 +129,7 @@ graph [
     Longitude 12.4839
   ]
   node [
-    id 50
+    id 48
     label "RM-2"
     Internal 1
     delta "modified"
@@ -129,7 +138,7 @@ graph [
     Longitude 12.4839
   ]
   node [
-    id 43
+    id 41
     label "LE"
     Internal 1
     delta "modified"
@@ -141,13 +150,13 @@ graph [
     id 49
     label "Mi-4"
     Internal 1
-    delta "added"
+    delta "removed"
     Latitude 45.46427
     Country "Italy"
     Longitude 9.18951
   ]
   node [
-    id 37
+    id 35
     label "PZ"
     Internal 1
     delta "modified"
@@ -180,7 +189,7 @@ graph [
     Internal 0
   ]
   node [
-    id 35
+    id 33
     label "TO"
     Internal 1
     delta "modified"
@@ -213,7 +222,7 @@ graph [
     Longitude 12.38286
   ]
   node [
-    id 29
+    id 27
     label "PD"
     Internal 1
     delta "modified"
@@ -225,22 +234,13 @@ graph [
     id 24
     label "FUC"
     Internal 1
-    delta "removed"
+    delta "added"
     Latitude 42.04023
     Country "Italy"
     Longitude 13.4388
   ]
   node [
-    id 48
-    label "BS"
-    Internal 1
-    delta "removed"
-    Latitude 45.52478
-    Country "Italy"
-    Longitude 10.22727
-  ]
-  node [
-    id 26
+    id 25
     label "Fi"
     Internal 1
     delta "modified"
@@ -249,7 +249,7 @@ graph [
     Longitude 11.25
   ]
   node [
-    id 54
+    id 52
     label "PI"
     Internal 1
     delta "modified"
@@ -258,7 +258,13 @@ graph [
     Longitude 10.39659
   ]
   node [
-    id 52
+    id 5
+    label "NAMEX"
+    delta "modified"
+    Internal 0
+  ]
+  node [
+    id 50
     label "Fe"
     Internal 1
     delta "modified"
@@ -267,19 +273,7 @@ graph [
     Longitude 11.62071
   ]
   node [
-    id 5
-    label "NAMEX"
-    delta "modified"
-    Internal 0
-  ]
-  node [
-    id 22
-    label "MIX    "
-    delta "added"
-    Internal 0
-  ]
-  node [
-    id 30
+    id 28
     label "MI-1"
     Internal 1
     delta "modified"
@@ -288,16 +282,16 @@ graph [
     Longitude 9.18951
   ]
   node [
-    id 13
-    label "MI-3"
+    id 37
+    label "FRA"
     Internal 1
     delta "modified"
-    Latitude 45.46427
+    Latitude 41.81632
     Country "Italy"
-    Longitude 9.18951
+    Longitude 12.66868
   ]
   node [
-    id 32
+    id 30
     label "MI-2"
     Internal 1
     delta "modified"
@@ -306,7 +300,7 @@ graph [
     Longitude 9.18951
   ]
   node [
-    id 51
+    id 31
     label "CO"
     Internal 1
     delta "modified"
@@ -315,7 +309,7 @@ graph [
     Longitude 9.18951
   ]
   node [
-    id 28
+    id 26
     label "VE"
     Internal 1
     delta "modified"
@@ -324,13 +318,13 @@ graph [
     Longitude 12.32667
   ]
   node [
-    id 47
+    id 45
     label "GEANT"
     delta "modified"
     Internal 0
   ]
   node [
-    id 38
+    id 36
     label "CB"
     Internal 1
     delta ""
@@ -348,7 +342,7 @@ graph [
     Longitude 9.13462
   ]
   node [
-    id 41
+    id 39
     label "AN"
     Internal 1
     delta "modified"
@@ -357,7 +351,7 @@ graph [
     Longitude 13.51008
   ]
   node [
-    id 40
+    id 38
     label "AQ"
     Internal 1
     delta ""
@@ -375,19 +369,13 @@ graph [
     Longitude 16.5987
   ]
   node [
-    id 34
+    id 32
     label "GE"
     Internal 1
     delta "modified"
     Latitude 44.40632
     Country "Italy"
     Longitude 8.93386
-  ]
-  node [
-    id 46
-    label "Google"
-    delta "modified"
-    Internal 0
   ]
   node [
     id 18
@@ -399,13 +387,19 @@ graph [
     Longitude 16.25019
   ]
   node [
-    id 49
+    id 47
     label "TO-PIX"
     delta "modified"
     Internal 0
   ]
   node [
-    id 55
+    id 22
+    label "MIX    "
+    delta "removed"
+    Internal 0
+  ]
+  node [
+    id 53
     label "Ur"
     Internal 1
     delta "modified"
@@ -432,7 +426,7 @@ graph [
     Longitude 15.54969
   ]
   node [
-    id 53
+    id 51
     label "Pv"
     Internal 1
     delta ""
@@ -441,13 +435,10 @@ graph [
     Longitude 9.16145
   ]
   node [
-    id 31
-    label "TN"
-    Internal 1
-    delta ""
-    Latitude 46.06787
-    Country "Italy"
-    Longitude 11.12108
+    id 44
+    label "Google"
+    delta "modified"
+    Internal 0
   ]
   node [
     id 6
@@ -462,7 +453,7 @@ graph [
     id 27
     label "PD-2"
     Internal 1
-    delta "removed"
+    delta "added"
     Latitude 45.41519
     Country "Italy"
     Longitude 11.88181
@@ -477,7 +468,7 @@ graph [
     Longitude 8.56028
   ]
   node [
-    id 42
+    id 40
     label "MT"
     Internal 1
     delta "modified"
@@ -489,7 +480,7 @@ graph [
     id 46
     label "MI-5"
     Internal 1
-    delta "added"
+    delta "removed"
     Latitude 45.46427
     Country "Italy"
     Longitude 9.18951
@@ -501,7 +492,7 @@ graph [
     Internal 0
   ]
   node [
-    id 36
+    id 34
     label "SA"
     Internal 1
     delta ""
@@ -510,78 +501,87 @@ graph [
     Longitude 14.76599
   ]
   node [
+    id 29
+    label "TN"
+    Internal 1
+    delta "modified"
+    Latitude 46.06787
+    Country "Italy"
+    Longitude 11.12108
+  ]
+  node [
     id 21
     label "EUMED CONNECT"
     delta ""
     Internal 0
   ]
   edge [
+    source 43
+    target 42
+    LinkSpeed "155"
+    LinkLabel "155 Mbps"
+    LinkSpeedUnits "M"
+    LinkSpeedRaw 155000000.0
+    delta ""
+  ]
+  edge [
     source 11
-    target 25
+    target 24
     LinkSpeed "1"
-    LinkNote "Peering,  "
     LinkSpeedUnits "G"
+    LinkNote "Peering,  "
     LinkLabel "Peering, 1 Gbps"
     LinkSpeedRaw 1000000000.0
     delta ""
   ]
   edge [
-    source 44
-    target 43
+    source 42
+    target 41
     LinkSpeed "622"
-    LinkSpeedUnits "M"
     LinkLabel "622 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 622000000.0
     delta ""
   ]
   edge [
-    source 44
-    target 37
+    source 42
+    target 35
     LinkSpeed "622"
-    LinkSpeedUnits "M"
     LinkLabel "622 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 622000000.0
     delta ""
   ]
   edge [
-    source 44
+    source 42
     target 16
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
-    source 44
+    source 42
     target 12
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
-    source 44
-    target 42
+    source 42
+    target 40
     LinkSpeed "622"
-    LinkSpeedUnits "M"
     LinkLabel "622 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 622000000.0
     delta ""
   ]
   edge [
-    source 44
-    target 45
-    LinkSpeed "155"
-    LinkSpeedUnits "M"
-    LinkLabel "155 Mbps"
-    LinkSpeedRaw 155000000.0
-    delta ""
-  ]
-  edge [
     source 12
-    target 30
+    target 28
     LinkSpeed "10"
     LinkSpeedUnits "G"
     LinkLabel "10 Gbps"
@@ -590,25 +590,25 @@ graph [
   ]
   edge [
     source 12
-    target 50
+    target 48
     LinkSpeed "10"
-    LinkSpeedUnits "G"
     LinkLabel "10 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 10000000000.0
     delta ""
   ]
   edge [
     source 12
-    target 41
+    target 39
     LinkSpeed "1"
-    LinkSpeedUnits "G"
     LinkLabel "1 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 1000000000.0
     delta ""
   ]
   edge [
     source 12
-    target 52
+    target 50
     LinkSpeed "1"
     LinkSpeedUnits "G"
     LinkLabel "1 Gbps"
@@ -617,53 +617,83 @@ graph [
   ]
   edge [
     source 12
-    target 29
+    target 27
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
     source 12
-    target 25
+    target 24
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
-    source 39
-    target 8
-    LinkSpeed "2.5"
-    LinkSpeedUnits "G"
-    LinkLabel "2.5 Gbps"
-    LinkSpeedRaw 2500000000.0
+    source 13
+    target 28
+    LinkLabel "Fibre ottica spenta (Dark Fibre)"
     delta ""
   ]
   edge [
-    source 39
-    target 50
-    LinkSpeed "2.5"
+    source 13
+    target 30
+    LinkLabel "Fibre ottica spenta (Dark Fibre)"
+    delta ""
+  ]
+  edge [
+    source 13
+    target 51
+    LinkSpeed "1"
+    LinkLabel "1 Gbps"
     LinkSpeedUnits "G"
-    LinkLabel "2.5 Gbps"
-    LinkSpeedRaw 2500000000.0
+    LinkSpeedRaw 1000000000.0
+    delta ""
+  ]
+  edge [
+    source 13
+    target 29
+    LinkSpeed "155"
+    LinkSpeedUnits "M"
+    LinkLabel "155 Mbps"
+    LinkSpeedRaw 155000000.0
+    delta ""
+  ]
+  edge [
+    source 13
+    target 48
+    LinkSpeed "1"
+    LinkLabel "1 Gbps"
+    LinkSpeedUnits "G"
+    LinkSpeedRaw 1000000000.0
+    delta ""
+  ]
+  edge [
+    source 13
+    target 46
+    LinkSpeed "1"
+    LinkLabel "1 Gbps"
+    LinkSpeedUnits "G"
+    LinkSpeedRaw 1000000000.0
     delta ""
   ]
   edge [
     source 2
-    target 30
+    target 28
     LinkSpeed "5"
-    LinkNote "Peering,  "
     LinkSpeedUnits "G"
+    LinkNote "Peering,  "
     LinkLabel "Peering, 5 Gbps"
     LinkSpeedRaw 5000000000.0
     delta ""
   ]
   edge [
     source 22
-    target 32
+    target 30
     LinkSpeed "4"
     LinkNote "Peering, "
     LinkSpeedUnits "G"
@@ -673,7 +703,7 @@ graph [
   ]
   edge [
     source 15
-    target 51
+    target 31
     LinkSpeed "2.5"
     LinkLabel "2.5 Gbps"
     LinkSpeedUnits "G"
@@ -691,73 +721,82 @@ graph [
   ]
   edge [
     source 15
-    target 29
+    target 27
     LinkSpeed "155"
-    LinkSpeedUnits "M"
     LinkLabel "155 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 155000000.0
     delta ""
   ]
   edge [
-    source 25
-    target 26
+    source 24
+    target 25
     LinkSpeed "34"
-    LinkSpeedUnits "M"
     LinkLabel "34 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 34000000.0
     delta ""
   ]
   edge [
-    source 25
-    target 54
+    source 24
+    target 52
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
     source 33
-    target 32
+    target 30
     LinkLabel "Fibre ottica spenta (Dark Fibre)"
     delta ""
   ]
   edge [
     source 33
-    target 51
+    target 31
     LinkLabel "Fibre ottica spenta (Dark Fibre)"
     delta ""
   ]
   edge [
     source 8
-    target 50
-    LinkLabel "Fibre ottica spenta (Dark Fibre)"
+    target 37
+    LinkSpeed "2.5"
+    LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
+    LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
     source 8
     target 4
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
     source 8
-    target 41
+    target 48
+    LinkLabel "Fibre ottica spenta (Dark Fibre)"
+    delta ""
+  ]
+  edge [
+    source 8
+    target 39
     LinkSpeed "155"
-    LinkSpeedUnits "M"
     LinkLabel "155 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 155000000.0
     delta ""
   ]
   edge [
     source 8
-    target 40
+    target 38
     LinkSpeed "622"
-    LinkSpeedUnits "M"
     LinkLabel "622 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 622000000.0
     delta ""
   ]
@@ -765,8 +804,8 @@ graph [
     source 8
     target 9
     LinkSpeed "155"
-    LinkSpeedUnits "M"
     LinkLabel "155 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 155000000.0
     delta ""
   ]
@@ -774,49 +813,58 @@ graph [
     source 8
     target 19
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
-    source 50
-    target 32
-    LinkSpeed "10"
+    source 48
+    target 37
+    LinkSpeed "2.5"
+    LinkLabel "2.5 Gbps"
     LinkSpeedUnits "G"
+    LinkSpeedRaw 2500000000.0
+    delta ""
+  ]
+  edge [
+    source 48
+    target 30
+    LinkSpeed "10"
     LinkLabel "10 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 10000000000.0
     delta ""
   ]
   edge [
-    source 50
+    source 48
     target 6
     LinkSpeed "155"
-    LinkSpeedUnits "M"
     LinkLabel "155 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 155000000.0
     delta ""
   ]
   edge [
-    source 50
+    source 48
     target 16
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
-    source 50
+    source 48
     target 4
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
-    source 50
+    source 48
     target 24
     LinkSpeed "34"
     LinkLabel "34 Mbps"
@@ -825,33 +873,33 @@ graph [
     delta ""
   ]
   edge [
-    source 50
-    target 54
+    source 48
+    target 52
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
-    source 50
+    source 48
     target 5
     LinkSpeed "13"
-    LinkNote "Peering,  "
     LinkSpeedUnits "G"
+    LinkNote "Peering,  "
     LinkLabel "Peering, 13 Gbps"
     LinkSpeedRaw 13000000000.0
     delta ""
   ]
   edge [
     source 49
-    target 30
+    target 28
     LinkLabel "Fibre ottica spenta (Dark Fibre)"
     delta ""
   ]
   edge [
     source 49
-    target 32
+    target 30
     LinkSpeed "2.5"
     LinkLabel "2.5 Gbps"
     LinkSpeedUnits "G"
@@ -860,22 +908,22 @@ graph [
   ]
   edge [
     source 49
-    target 51
+    target 31
     LinkLabel "Fibre ottica spenta (Dark Fibre)"
     delta ""
   ]
   edge [
     source 16
-    target 38
+    target 36
     LinkSpeed "34"
-    LinkSpeedUnits "M"
     LinkLabel "34 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 34000000.0
     delta ""
   ]
   edge [
     source 16
-    target 36
+    target 34
     LinkSpeed "155"
     LinkSpeedUnits "M"
     LinkLabel "155 Mbps"
@@ -886,8 +934,8 @@ graph [
     source 16
     target 19
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
@@ -895,8 +943,8 @@ graph [
     source 4
     target 7
     LinkSpeed "622"
-    LinkSpeedUnits "M"
     LinkLabel "622 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 622000000.0
     delta ""
   ]
@@ -908,48 +956,48 @@ graph [
   ]
   edge [
     source 23
-    target 32
+    target 30
     LinkSpeed "5"
-    LinkNote "Peering,  "
     LinkSpeedUnits "G"
+    LinkNote "Peering,  "
     LinkLabel "Peering, 5 Gbps"
     LinkSpeedRaw 5000000000.0
     delta ""
   ]
   edge [
-    source 35
-    target 49
+    source 33
+    target 47
     LinkSpeed "1"
-    LinkNote "Peering,  "
     LinkSpeedUnits "G"
+    LinkNote "Peering,  "
     LinkLabel "Peering, 1 Gbps"
     LinkSpeedRaw 1000000000.0
     delta ""
   ]
   edge [
-    source 35
-    target 32
+    source 33
+    target 30
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
-    source 35
-    target 54
+    source 33
+    target 52
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
     source 14
-    target 29
+    target 27
     LinkSpeed "1"
-    LinkNote "Peering,  "
     LinkSpeedUnits "G"
+    LinkNote "Peering,  "
     LinkLabel "Peering, 1 Gbps"
     LinkSpeedRaw 1000000000.0
     delta ""
@@ -958,22 +1006,22 @@ graph [
     source 20
     target 19
     LinkSpeed "622"
-    LinkSpeedUnits "M"
     LinkLabel "622 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 622000000.0
     delta ""
   ]
   edge [
-    source 29
-    target 30
+    source 27
+    target 28
     LinkSpeed "2.5"
-    LinkSpeedUnits "G"
     LinkLabel "2.5 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 2500000000.0
     delta ""
   ]
   edge [
-    source 29
+    source 27
     target 27
     LinkSpeed "1"
     LinkLabel "1 Gbps"
@@ -982,35 +1030,99 @@ graph [
     delta ""
   ]
   edge [
-    source 29
-    target 28
+    source 27
+    target 26
     LinkSpeed "622"
-    LinkSpeedUnits "M"
     LinkLabel "622 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 622000000.0
     delta ""
   ]
   edge [
-    source 48
-    target 13
-    LinkSpeed "1"
-    LinkLabel "1 Gbps"
-    LinkSpeedUnits "G"
-    LinkSpeedRaw 1000000000.0
-    delta ""
-  ]
-  edge [
-    source 54
-    target 34
+    source 52
+    target 32
     LinkSpeed "155"
-    LinkSpeedUnits "M"
     LinkLabel "155 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 155000000.0
     delta ""
   ]
   edge [
-    source 22
+    source 28
+    target 30
+    LinkSpeed "10"
+    LinkLabel "10 Gbps"
+    LinkSpeedUnits "G"
+    LinkSpeedRaw 10000000000.0
+    delta ""
+  ]
+  edge [
+    source 28
+    target 31
+    LinkLabel "Fibre ottica spenta (Dark Fibre)"
+    delta ""
+  ]
+  edge [
+    source 28
+    target 45
+    LinkSpeed "10"
+    LinkSpeedUnits "G"
+    LinkNote "Fibre ottica spenta (Dark Fibre),  "
+    LinkLabel "Fibre ottica spenta (Dark Fibre), 10 Gbps"
+    LinkSpeedRaw 10000000000.0
+    delta "modified"
+  ]
+  edge [
+    source 28
+    target 0
+    LinkSpeed "10"
+    LinkSpeedUnits "G"
+    LinkNote "Fibre ottica spenta (Dark Fibre),  "
+    LinkLabel "Fibre ottica spenta (Dark Fibre), 10 Gbps"
+    LinkSpeedRaw 10000000000.0
+    delta ""
+  ]
+  edge [
+    source 30
+    target 44
+    LinkSpeed "2"
+    LinkSpeedUnits "G"
+    LinkNote "Peering,  "
+    LinkLabel "Peering, 2 Gbps"
+    LinkSpeedRaw 2000000000.0
+    delta ""
+  ]
+  edge [
+    source 30
+    target 31
+    LinkSpeed "2.5"
+    LinkLabel "Fibre ottica spenta (Dark Fibre)"
+    LinkSpeedUnits "G"
+    LinkSpeedRaw 2500000000.0
+    delta ""
+  ]
+  edge [
+    source 30
+    target 45
+    LinkSpeed "2.5"
+    LinkSpeedUnits "G"
+    LinkNote "Fibre ottica spenta (Dark Fibre),  "
+    LinkLabel "Fibre ottica spenta (Dark Fibre), 2.5 Gbps"
+    LinkSpeedRaw 2500000000.0
+    delta ""
+  ]
+  edge [
+    source 30
     target 32
+    LinkSpeed "155"
+    LinkLabel "155 Mbps"
+    LinkSpeedUnits "M"
+    LinkSpeedRaw 155000000.0
+    delta ""
+  ]
+  edge [
+    source 30
+    target 22
     LinkSpeed "4"
     LinkNote "Peering, "
     LinkSpeedUnits "G"
@@ -1019,132 +1131,20 @@ graph [
     delta ""
   ]
   edge [
-    source 30
-    target 13
-    LinkLabel "Fibre ottica spenta (Dark Fibre)"
-    delta ""
-  ]
-  edge [
-    source 30
-    target 32
-    LinkSpeed "10"
-    LinkSpeedUnits "G"
-    LinkLabel "10 Gbps"
-    LinkSpeedRaw 10000000000.0
-    delta ""
-  ]
-  edge [
-    source 30
-    target 51
-    LinkLabel "Fibre ottica spenta (Dark Fibre)"
-    delta ""
-  ]
-  edge [
-    source 30
-    target 47
-    LinkSpeed "20"
-    LinkNote "Fibre ottica spenta (Dark Fibre),  "
-    LinkSpeedUnits "G"
-    LinkLabel "Fibre ottica spenta (Dark Fibre), 20 Gbps"
-    LinkSpeedRaw 20000000000.0
-    delta "modified"
-  ]
-  edge [
-    source 30
-    target 0
-    LinkSpeed "10"
-    LinkNote "Fibre ottica spenta (Dark Fibre),  "
-    LinkSpeedUnits "G"
-    LinkLabel "Fibre ottica spenta (Dark Fibre), 10 Gbps"
-    LinkSpeedRaw 10000000000.0
-    delta ""
-  ]
-  edge [
-    source 13
-    target 32
-    LinkLabel "Fibre ottica spenta (Dark Fibre)"
-    delta ""
-  ]
-  edge [
-    source 13
+    source 39
     target 53
-    LinkSpeed "1"
-    LinkSpeedUnits "G"
-    LinkLabel "1 Gbps"
-    LinkSpeedRaw 1000000000.0
-    delta ""
-  ]
-  edge [
-    source 13
-    target 31
-    LinkSpeed "155"
-    LinkSpeedUnits "M"
-    LinkLabel "155 Mbps"
-    LinkSpeedRaw 155000000.0
-    delta ""
-  ]
-  edge [
-    source 13
-    target 46
-    LinkSpeed "1"
-    LinkLabel "1 Gbps"
-    LinkSpeedUnits "G"
-    LinkSpeedRaw 1000000000.0
-    delta ""
-  ]
-  edge [
-    source 32
-    target 46
-    LinkSpeed "2"
-    LinkNote "Peering,  "
-    LinkSpeedUnits "G"
-    LinkLabel "Peering, 2 Gbps"
-    LinkSpeedRaw 2000000000.0
-    delta ""
-  ]
-  edge [
-    source 32
-    target 51
-    LinkSpeed "2.5"
-    LinkLabel "2.5 Gbps"
-    LinkSpeedUnits "G"
-    LinkSpeedRaw 2500000000.0
-    delta ""
-  ]
-  edge [
-    source 32
-    target 47
-    LinkSpeed "2.5"
-    LinkNote "Fibre ottica spenta (Dark Fibre),  "
-    LinkSpeedUnits "G"
-    LinkLabel "Fibre ottica spenta (Dark Fibre), 2.5 Gbps"
-    LinkSpeedRaw 2500000000.0
-    delta ""
-  ]
-  edge [
-    source 32
-    target 34
-    LinkSpeed "155"
-    LinkSpeedUnits "M"
-    LinkLabel "155 Mbps"
-    LinkSpeedRaw 155000000.0
-    delta ""
-  ]
-  edge [
-    source 41
-    target 55
     LinkSpeed "622"
-    LinkSpeedUnits "M"
     LinkLabel "622 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 622000000.0
     delta ""
   ]
   edge [
-    source 40
+    source 38
     target 6
     LinkSpeed "34"
-    LinkSpeedUnits "M"
     LinkLabel "34 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 34000000.0
     delta ""
   ]
@@ -1152,8 +1152,8 @@ graph [
     source 10
     target 18
     LinkSpeed "100"
-    LinkSpeedUnits "M"
     LinkLabel "100 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 100000000.0
     delta ""
   ]
@@ -1161,8 +1161,8 @@ graph [
     source 18
     target 19
     LinkSpeed "155"
-    LinkSpeedUnits "M"
     LinkLabel "155 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 155000000.0
     delta ""
   ]
@@ -1170,8 +1170,8 @@ graph [
     source 19
     target 17
     LinkSpeed "155"
-    LinkSpeedUnits "M"
     LinkLabel "155 Mbps"
+    LinkSpeedUnits "M"
     LinkSpeedRaw 155000000.0
     delta ""
   ]
@@ -1179,8 +1179,8 @@ graph [
     source 19
     target 21
     LinkSpeed "1"
-    LinkSpeedUnits "G"
     LinkLabel "1 Gbps"
+    LinkSpeedUnits "G"
     LinkSpeedRaw 1000000000.0
     delta ""
   ]

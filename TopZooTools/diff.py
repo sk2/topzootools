@@ -2,6 +2,8 @@
 
 import networkx as nx
 import argparse
+import TopZooTools.geoplot
+
 
 """
 problems: hyperedges (eg cesnet)
@@ -18,13 +20,15 @@ def main():
     args = parser.parse_args()
     fileA = args.fileA
     fileB = args.fileB
+    compare(fileA, fileB)
+
+def compare(fileA, fileB):
     graphA = nx.read_gml(fileA)
 #Convert to single-edge, undirected
-    graphA = nx.Graph(graphA)
+    #graphA = nx.Graph(graphA)
     graphB = nx.read_gml(fileB)
-    graphB = nx.Graph(graphB)
+    #graphB = nx.Graph(graphB)
 
-#TODO: need to handle hyperedges: as no label
     labelsA = [d.get("label") for n,d in graphA.nodes(data=True)]
     duplicateLabelsA = set( label for label in labelsA if label != "None" and labelsA.count(label) > 1 )
     labelsB = [d.get("label") for n,d in graphB.nodes(data=True)]
@@ -111,8 +115,9 @@ def main():
             if graphA_reduced.number_of_edges(src, dst) == 1:
                 dataA = graphA_reduced[src][dst][0] # use data for the only edge
             elif graphB.is_multigraph():
-                if graphA_reduced.number_of_edges() != graphB_reduced.number_of_edges():
-                    print "Edge count differs for ", src, dst
+                if graphA_reduced.number_of_edges(src) != graphB_reduced.number_of_edges(dst):
+                    print "Edge count differs for ", src, dst, "(", graphA_reduced.number_of_edges(src), "vs", graphB_reduced.number_of_edges(dst), ")"
+                    edges_modified.add( (src, dst))
 # both A and B are multigraphs, check the same edge count for node pair
         dataB = graphB_reduced[src][dst]
         if graphB.is_multigraph():
@@ -191,12 +196,27 @@ def main():
                 )
 
 
-
     composed.graph["Network"] = title
+    composed.name = title
 
     filename_composed = "composed.graphml"
     nx.write_graphml(composed, filename_composed)
-    nx.write_gml(composed, "composed.gml")
+    #nx.write_gml(composed, "composed.gml")
+
+
+#TODO: integrate plotting - if --plot then plot
+    output_path = ""
+    TopZooTools.geoplot.plot_graph(composed, output_path,
+                    use_labels=True,
+                    title=True,
+                    label_font_size=12,
+                    #use_bluemarble=True,
+                    node_size = 100,
+                    edge_font_size=8,
+                    basemap_resolution_level = 3,
+                    pdf=True,
+                    country_color="#cccccc",
+                    )
 
 
 #TODO: handle self-loops - where do they come from???
