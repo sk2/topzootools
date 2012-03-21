@@ -34,11 +34,17 @@ def main():
     if duplicateLabelsB:
         print "Duplicate labels in graph B:", ", ".join(sorted(duplicateLabelsB))
 
-    if any(d.get("hyperedge") for n, d in graphA.nodes(data=True)):
-        print "a hyperedges"
-    if any(d.get("hyperedge") for n, d in graphB.nodes(data=True)):
-        print "b hyperedges"
-
+    # relabel hyperedges based on neighbors
+    hyperedges_a = [n for n, d in graphA.nodes(data=True) if d.get("hyperedge")]
+    for hyperedge in hyperedges_a:
+        neighbors = sorted(graphA.node[n].get("label") for n in graphA.neighbors(hyperedge))
+        new_label = "_".join(neighbors)
+        graphA.node[hyperedge]['label'] = new_label
+    hyperedges_b = [n for n, d in graphB.nodes(data=True) if d.get("hyperedge")]
+    for hyperedge in hyperedges_b:
+        neighbors = sorted(graphB.node[n].get("label") for n in graphB.neighbors(hyperedge))
+        new_label = "_".join(neighbors)
+        graphB.node[hyperedge]['label'] = new_label
 
 # compare labels
     label_mappingA = dict( (d.get("label"), n) 
@@ -162,6 +168,11 @@ def main():
     if composed.number_of_selfloops():
         for label in composed.nodes_with_selfloops():
             pass
+
+    # and strip out the label from hyperedges
+    for n in composed:
+        if composed.node[n].get("hyperedge"):
+            composed.node[n]['label'] = ""
 
     # set metadata
     title = ""

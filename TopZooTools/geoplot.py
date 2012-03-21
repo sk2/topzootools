@@ -19,8 +19,8 @@ __all__ = ['plot_graph']
 
 # Hide axes as per http://matplotlib.sourceforge.net/users/customizing.html
 plt.rc('axes',linewidth=0)
-plt.rcParams['font.sans-serif'] = 'Helvetica'
-plt.rcParams['font.sans-serif'] = 'Times'
+#plt.rcParams['font.sans-serif'] = 'Helvetica'
+#plt.rcParams['font.sans-serif'] = 'Times'
 #TODO: allow this to be selectable from command line
 
 #TODO: make this selectable from command line
