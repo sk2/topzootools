@@ -46,6 +46,7 @@ def main():
         os.mkdir(pickle_dir)
 
     summary_data = {}
+    stats = {}
 
     disconnected_networks = {}
 
@@ -54,6 +55,7 @@ def main():
         # Extract name of network from file path
         path, filename = os.path.split(net_file)
         network_name = os.path.splitext(filename)[0]
+        stats[network_name] = {}
 
         #print "Converting: {0}".format(network_name)
 
@@ -74,14 +76,14 @@ def main():
         graph = graph.to_undirected()
         graph = nx.MultiGraph(graph)
 
-
         external_nodes = [ n for n in graph.nodes()
                           if 'Internal' in graph.node[n] and
                           graph.node[n]['Internal'] == 0]
         graph.remove_nodes_from(external_nodes)
-        hyperedge_nodes = [ n for n in graph.nodes()
-                          if 'hyperedge' in graph.node[n] and
-                          graph.node[n]['hyperedge'] == 1]
+        hyperedge_nodes = [ n for n,d in graph.nodes(data=True)
+                if d.get("hyperedge")]
+        stats[network_name]['hyperedge'] = len(hyperedge_nodes)
+        stats[network_name]['external'] = len(external_nodes)
 
         if not nx.is_connected(graph):
             components = [component for component in
@@ -105,6 +107,20 @@ def main():
     # And range
     print "------"
     print "%i networks" % len(summary_data)
+
+
+# stats
+    print "-----"
+    print "Hyperedges"
+    for network, data in stats.items():
+        if data['hyperedge']:
+            print network, "\t\t", data['hyperedge']
+
+    print "-----"
+    print "External Nodes"
+    for network, data in stats.items():
+        if data['external']:
+            print network, "\t\t", data['external']
 
 
     # And range

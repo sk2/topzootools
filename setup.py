@@ -14,6 +14,7 @@ setup (
              'zooconvert = TopZooTools.converter:main',         
              'zooplot = TopZooTools.geoplot:main',
              'zoofilter = TopZooTools.filter:main',
+             'zoodiff = TopZooTools.diff:main',
              'zoostats= TopZooTools.zoostats:main',
              'zoogeocode= TopZooTools.geocoder:main',
              'rocketfuel2zoo= TopZooTools.rocketfuel2zoo:main',
