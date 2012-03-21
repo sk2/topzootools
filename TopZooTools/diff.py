@@ -3,6 +3,8 @@
 import networkx as nx
 import argparse
 import TopZooTools.geoplot
+import pprint
+
 
 
 """
@@ -15,14 +17,32 @@ multi-edge graphs (eg garr200902)
 
 def main():
     parser = argparse.ArgumentParser(prog='PROG')
-    parser.add_argument('fileA')
-    parser.add_argument('fileB')
+    parser.add_argument('files', nargs='+')
     args = parser.parse_args()
-    fileA = args.fileA
-    fileB = args.fileB
-    compare(fileA, fileB)
+    files = args.files
+    if len(files) < 2:
+        print "Need at least two files to compare"
+        return
+    if len(files) == 2:
+        fileA, fileB = files
+        compare(fileA, fileB)
+    else:
+# sort chronologically
+        print "Loading graph metadata for chronological sorting"
+        network_date = {}
+        for network_file in files:
+            graph = nx.read_gml(network_file)
+            network_date[network_file] = (graph.graph['DateYear'], graph.graph['DateMonth'])
+        files = sorted(files, key = lambda x: network_date[x])
+        pairs = [(a, b) for (a, b) in zip(files, files[1:])]
+        for fileA, fileB in pairs:
+            compare(fileA, fileB)
+                
+        
+# See if A is a wildcard -> glob
 
 def compare(fileA, fileB):
+    print "Comparing ", fileA, "to", fileB
     graphA = nx.read_gml(fileA)
 #Convert to single-edge, undirected
     #graphA = nx.Graph(graphA)
@@ -144,6 +164,9 @@ def compare(fileA, fileB):
     mappingB = dict ( (n, d.get("label")) for n, d in graphB.nodes(data=True))
     graphARelabelled = nx.relabel_nodes(graphA, mappingA)
     graphBRelabelled = nx.relabel_nodes(graphB, mappingB)
+# and reduce to single edge
+    graphARelabelled = nx.Graph(graphARelabelled)
+    graphBRelabelled = nx.Graph(graphBRelabelled)
     
     composed = nx.compose(graphARelabelled, graphBRelabelled)
     if composed.is_multigraph():
