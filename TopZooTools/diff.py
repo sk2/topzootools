@@ -205,7 +205,7 @@ def compare(fileA, fileB):
     # set metadata
     title = ""
     if graphA.graph['Network'] == graphB.graph['Network']:
-        title = "%s: %s vs %s" % (
+        title = "%s %s vs %s" % (
                 graphA.graph['Network'],
                 graphA.graph['NetworkDate'],
                 graphB.graph['NetworkDate'],

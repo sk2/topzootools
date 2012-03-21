@@ -131,6 +131,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                no_watermark = False,
                show_figure=False,
                edge_font_size =3,
+               standalone = False, # if called programatically
                edge_label_attribute=False, pdf=False, png=False):
 
     output_path = os.path.abspath(output_path)
@@ -1167,7 +1168,8 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     if show_figure:
         plt.show()
 
-    #plt.close()
+    if not standalone:
+        plt.close()
 
 
 #TODO: replace magic numbers with constants
@@ -1281,6 +1283,7 @@ def main():
                    no_watermark = options.no_watermark,
                    pickle_dir=pickle_dir,
                    png=options.png,
+                   standalone = True,
             )
 
     # try heatmap
