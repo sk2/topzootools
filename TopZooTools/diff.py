@@ -1,11 +1,6 @@
 #! /usr/bin/env python
 
 import networkx as nx
-import sys
-import os
-import glob
-from collections import defaultdict
-import pprint
 import argparse
 
 """
@@ -30,6 +25,15 @@ def main():
     graphB = nx.Graph(graphB)
 
 #TODO: need to handle hyperedges: as no label
+    labelsA = [d.get("label") for n,d in graphA.nodes(data=True)]
+    duplicateLabelsA = set( label for label in labelsA if label != "None" and labelsA.count(label) > 1 )
+    labelsB = [d.get("label") for n,d in graphB.nodes(data=True)]
+    duplicateLabelsB = set( label for label in labelsB if label != "None" and labelsB.count(label) > 1 )
+    if duplicateLabelsA:
+        print "Duplicate labels in graph A:", ", ".join(sorted(duplicateLabelsA))
+    if duplicateLabelsB:
+        print "Duplicate labels in graph B:", ", ".join(sorted(duplicateLabelsB))
+
 
 # compare labels
     label_mappingA = dict( (d.get("label"), n) 
@@ -46,16 +50,17 @@ def main():
     labels_removed = labelsA - labelsB # in A but not B
     labels_added = labelsB - labelsA # in B but not A
     labels_common = labelsA & labelsB
-    print "Nodes added:", labels_added
-    print "Nodes removed:", labels_removed
+    print "Nodes added:", ", ".join(sorted(labels_added))
+    print "Nodes removed:", ", ".join(sorted(labels_removed))
 # and find the nodes which were added/removed (inverse mapping)
     nodes_added = [label_mappingB[label] for label in labels_added]
     nodes_removed = [label_mappingA[label] for label in labels_removed]
-    nodes_common = [label_mappingA[label] for label in labels_common]
-    nodes_modified = set()
-    for node in nodes_common:
-        dataA = graphA[node]
-        dataB = graphB[node]
+    labels_modified = set()
+    for label in labels_common:
+        nodeA = label_mappingA[label]
+        nodeB = label_mappingB[label]
+        dataA = graphA[nodeA]
+        dataB = graphB[nodeB]
         keysA = set(dataA.keys())
         keysB = set(dataB.keys())
         #print dataA, dataB
@@ -65,10 +70,7 @@ def main():
         modified = [key for key in same if dataA[key] != dataB[key]]
         if len(added) or len(removed) or len(modified):
             #TODO: check handling for multi-edge
-            nodes_modified.add(node)
-
-    print "modified nodes", nodes_modified
-    labels_modified = [graphA.node[n].get("label") for n in nodes_modified]
+            labels_modified.add(label)
 
 # need common nodes for edge comparisons
 
@@ -85,7 +87,13 @@ def main():
     edges_removed = set( (s,t) for (s,t) in graphA_reduced.edges() if not graphB_reduced.has_edge(s,t))
     edges_added = set( (s,t) for (s,t) in graphB_reduced.edges() if not graphA_reduced.has_edge(s,t))
     edges_common = set( (s,t) for (s,t) in graphA_reduced.edges() if graphB_reduced.has_edge(s,t))
+    if edges_added:
+        print "Edges added:", ", ".join(sorted("(%s, %s)" % (s,t) for s,t in edges_added))
+    if edges_removed:
+        print "Edges removed:", ", ".join(sorted("(%s, %s)" % (s,t) for s,t in edges_removed))
+
     edges_modified = set()
+    print "Edges modified:"
     for src, dst in edges_common:
         dataA = graphA_reduced[src][dst]
         if graphA.is_multigraph():
@@ -118,10 +126,10 @@ def main():
 #TODO: save a graphml with the diffs marked up
     mappingA = dict ( (n, d.get("label")) for n, d in graphA.nodes(data=True))
     mappingB = dict ( (n, d.get("label")) for n, d in graphB.nodes(data=True))
-    nx.relabel_nodes(graphA, mappingA, copy=False)
-    nx.relabel_nodes(graphB, mappingB, copy=False)
+    graphARelabelled = nx.relabel_nodes(graphA, mappingA)
+    graphBRelabelled = nx.relabel_nodes(graphB, mappingB)
     
-    composed = nx.compose(graphA, graphB)
+    composed = nx.compose(graphARelabelled, graphBRelabelled)
     if composed.is_multigraph():
         print "Composed graph is multi-graph, converting to single-edge"
         composed = nx.Graph(composed)
@@ -136,8 +144,6 @@ def main():
             delta = "modified"
         composed.node[n]['delta'] = delta
 
-    print "edges added", edges_added
-
     for src, dst in composed.edges():
         delta = ""
         if (src, dst) in edges_added:
@@ -148,8 +154,13 @@ def main():
             delta = "modified"
         composed[src][dst]['delta'] = delta
 #TODO: make this refer to the source graph metadata/filename
+    if composed.number_of_selfloops():
+        for label in composed.nodes_with_selfloops():
+            pass
+
     filename_composed = "composed.graphml"
     nx.write_graphml(composed, filename_composed)
+    nx.write_gml(composed, "composed.gml")
 
 
 #TODO: handle self-loops - where do they come from???

@@ -711,6 +711,9 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     if False:
         pass
     else:
+        delta_colors = { 
+                'added': 'g', 'removed': 'r', 'modified': 'b', 
+                '': node_color} # used default color if no delta
         for src, dst, data in G.edges(data=True):
             if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
                 # Hacky way to not plot edge for IL and RU
@@ -735,6 +738,9 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
             else:
                 #TODO: handle this in legend
                 edge_color = default_edge_color
+
+            if 'delta' in data:
+                edge_color = delta_colors[data['delta']]
 
             if 'zorder' in data:
                 zorder = data['zorder']
@@ -944,12 +950,19 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                   scatterpoints=1)
 
     else:
+        #plot delta colors
+        delta_colors = { 
+                'added': 'g', 'removed': 'r', 'modified': 'b', 
+                '': node_color} # used default color if no delta
+        node_deltas = [d.get("delta") for n,d in G.nodes(data=True)]
+        node_color = [delta_colors[delta] for delta in node_deltas]
         plotted_nodes = nx.draw_networkx_nodes(G, pos, 
                                                nodelist = geocoded_cities,
                                                node_size = node_size, 
                                                #alpha = 0.8, 
                                                linewidths = (0,0),
                                                node_color = node_color)
+
 
 
         nx.draw_networkx_nodes(G, pos, nodelist = hyperedge_nodes,
@@ -1019,7 +1032,8 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                                         curr_y + extra_custom_offsets[label][1])
 
 
-        elif 'Network' in G.graph and G.graph['Network'] == 'GARR':
+        elif 'Network' in G.graph and G.graph['Network'] == 'GARR' and False:
+            #TODO: see if this is still needed
             # hacky way to put labels on left or right
             label_pos = dict( (key, (x+40000, y)) for key, (x,y)
                              in pos.items())
