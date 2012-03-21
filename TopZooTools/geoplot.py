@@ -85,23 +85,16 @@ opt.add_option('--no_watermark', action="store_false",
 opt.add_option('--res', help="Resolution level from 0 (none) to 5"
                " (full)", type="int", default=1)
 
-opt.add_option('--node_size', 
-               help="Size to plot nodes as",
-               type="float", default=10)
-
+opt.add_option('--node_size', help="Size to plot nodes as", type="float", default=10) 
 opt.add_option('--image_scale', 
                help="Image quality level for bluemarble and warp images"
                "default 0 (none), 1 is high",
                type="float", default=0)
 
-opt.add_option('--label_font_size', 
-               help="Size to plot nodes labels as",
-               type="float", default=10)
+opt.add_option('--label_font_size', help="Size to plot nodes labels as", type="float", default=10)
+opt.add_option('--country_color', help="Background color for countries", type="str", default="#336699")
 
-opt.add_option('--line_width', 
-               help="Size to plot lines as",
-               type="float", default=1)
-
+opt.add_option('--line_width', help="Size to plot lines as", type="float", default=1) 
 opt.add_option('--heatmap', action="store_true",
                default=False, help="Plot heatmap")
 opt.add_option('--title', action="store_true",
@@ -542,6 +535,9 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         for n, data in G.nodes(data = True):
             print "%s: %s" % (n, data['label'])
 
+    if not country_color.startswith("#"):
+        country_color = "#" + country_color
+
     if use_bluemarble:
         m.bluemarble(scale = image_scale)
         #m.bluemarble()
@@ -712,7 +708,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         pass
     else:
         delta_colors = { 
-                'added': 'g', 'removed': 'r', 'modified': 'b', 
+                'added': '#339966', 'removed': 'r', 'modified': '#3366ff', 
                 '': node_color} # used default color if no delta
         for src, dst, data in G.edges(data=True):
             if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
@@ -952,7 +948,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     else:
         #plot delta colors
         delta_colors = { 
-                'added': 'g', 'removed': 'r', 'modified': 'b', 
+                'added': '#339966', 'removed': 'r', 'modified': '#3366ff', 
                 '': node_color} # used default color if no delta
         node_deltas = [d.get("delta") for n,d in G.nodes(data=True)]
         node_color = [delta_colors[delta] for delta in node_deltas]
@@ -1281,6 +1277,7 @@ def main():
                    manual_image_scale = options.image_scale,
                    label_font_size = options.label_font_size,
                    pdf=options.pdf,
+                   country_color = options.country_color,
                    no_watermark = options.no_watermark,
                    pickle_dir=pickle_dir,
                    png=options.png,

@@ -34,6 +34,11 @@ def main():
     if duplicateLabelsB:
         print "Duplicate labels in graph B:", ", ".join(sorted(duplicateLabelsB))
 
+    if any(d.get("hyperedge") for n, d in graphA.nodes(data=True)):
+        print "a hyperedges"
+    if any(d.get("hyperedge") for n, d in graphB.nodes(data=True)):
+        print "b hyperedges"
+
 
 # compare labels
     label_mappingA = dict( (d.get("label"), n) 
@@ -157,6 +162,26 @@ def main():
     if composed.number_of_selfloops():
         for label in composed.nodes_with_selfloops():
             pass
+
+    # set metadata
+    title = ""
+    if graphA.graph['Network'] == graphB.graph['Network']:
+        title = "%s: %s vs %s" % (
+                graphA.graph['Network'],
+                graphA.graph['NetworkDate'],
+                graphB.graph['NetworkDate'],
+                )
+    else:
+        title = "%s %s vs %s %s" % (
+                graphA.graph['Network'],
+                graphA.graph['NetworkDate'],
+                graphB.graph['Network'],
+                graphB.graph['NetworkDate'],
+                )
+
+
+
+    composed.graph["Network"] = title
 
     filename_composed = "composed.graphml"
     nx.write_graphml(composed, filename_composed)
