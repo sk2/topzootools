@@ -430,6 +430,8 @@ def main():
             if options.archive:
                 archive_filelist.append(mat_file)
             sparse_matrix = nx.to_numpy_matrix(graph)
+            print "Nodes for ", network_name, ":", ", ".join(d.get("label")
+                    for n, d in graph.nodes(data=True))
 
             # Write out manually (numpy.tofile() writes as all on one line)
             for line in sparse_matrix.tolist():

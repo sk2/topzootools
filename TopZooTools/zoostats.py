@@ -112,13 +112,13 @@ def main():
 # stats
     print "-----"
     print "Hyperedges"
-    for network, data in stats.items():
+    for network, data in sorted(stats.items()):
         if data['hyperedge']:
             print network, "\t\t", data['hyperedge']
 
     print "-----"
     print "External Nodes"
-    for network, data in stats.items():
+    for network, data in sorted(stats.items()):
         if data['external']:
             print network, "\t\t", data['external']
 

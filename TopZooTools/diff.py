@@ -231,10 +231,10 @@ def compare(fileA, fileB):
     output_path = ""
     TopZooTools.geoplot.plot_graph(composed, output_path,
                     use_labels=True,
-                    title=True,
+                    #title=True,
                     label_font_size=12,
                     #use_bluemarble=True,
-                    node_size = 100,
+                    node_size = 200,
                     edge_font_size=8,
                     basemap_resolution_level = 3,
                     pdf=True,

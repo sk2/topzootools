@@ -710,7 +710,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     else:
         delta_colors = { 
                 'added': '#339966', 'removed': 'r', 'modified': '#3366ff', 
-                '': node_color} # used default color if no delta
+                '': default_edge_color} # used default color if no delta
         for src, dst, data in G.edges(data=True):
             if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
                 # Hacky way to not plot edge for IL and RU
