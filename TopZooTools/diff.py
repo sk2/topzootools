@@ -230,15 +230,17 @@ def compare(fileA, fileB):
 #TODO: integrate plotting - if --plot then plot
     output_path = ""
     TopZooTools.geoplot.plot_graph(composed, output_path,
-                    use_labels=True,
+                    #use_labels=True,
                     #title=True,
                     label_font_size=12,
                     #use_bluemarble=True,
-                    node_size = 200,
+                    line_width = 3,
+                    node_size = 150,
                     edge_font_size=8,
                     basemap_resolution_level = 3,
                     pdf=True,
                     country_color="#cccccc",
+                    user_default_edge_color = "k",
                     )
 
 

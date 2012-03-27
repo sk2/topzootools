@@ -49,6 +49,13 @@ def main():
     stats = {}
 
     disconnected_networks = {}
+    multi_edge_count = 0
+    pop_data_count = 0
+    edge_data_count = 0
+    standard_pop_keys = set(["Country", 'Internal', 'Latitude', 'Longitude', 'id', 
+        'geocode_country', 'geocode_append', 'geocode_id',   'label'])
+    standard_edge_keys = set(["id"])
+    geocode_ratio = dict()
 
     for net_file in network_files:
 
@@ -74,7 +81,10 @@ def main():
             nx.write_gpickle(graph, pickle_file)
 
         graph = graph.to_undirected()
+        if graph.is_multigraph():
+            multi_edge_count += 1
         graph = nx.MultiGraph(graph)
+        #print "Network", graph.graph.get("Network")
 
         external_nodes = [ n for n in graph.nodes()
                           if 'Internal' in graph.node[n] and
@@ -84,6 +94,22 @@ def main():
                 if d.get("hyperedge")]
         stats[network_name]['hyperedge'] = len(hyperedge_nodes)
         stats[network_name]['external'] = len(external_nodes)
+        
+        for node, data in graph.nodes(data=True):
+            if any(key for key in data if key not in standard_pop_keys):
+                #print "node data for", data
+                pop_data_count += 1
+                break
+
+        for s, t, data in graph.edges(data=True):
+            if any(key for key in data if key not in standard_edge_keys):
+                #print "edge data for", data
+                edge_data_count += 1
+                break
+
+        geocoded_nodes = sum(1 for n, d in graph.nodes(data=True)
+                if d.get("Latitude") and d.get("Longitude"))
+        geocode_ratio[network_name] = 1.0*geocoded_nodes/len(graph)
 
         if not nx.is_connected(graph):
             components = [component for component in
@@ -107,20 +133,35 @@ def main():
     # And range
     print "------"
     print "%i networks" % len(summary_data)
+    unique_networks = set(d.get("Network") for n, d in summary_data.items())
+    print "Unique:", len(unique_networks)
+    print "Multi-edges", multi_edge_count
+    print "Networks with pop metadata", pop_data_count
+    print "Networks with edge metadata", edge_data_count
+    print "Geocode ratio > 10%", sum(1 for key, val in geocode_ratio.items() if val > 0.1)
+    print "Geocode ratio > 50%", sum(1 for key, val in geocode_ratio.items() if val > 0.5)
+    print "Geocode ratio > 90%", sum(1 for key, val in geocode_ratio.items() if val > 0.9)
+    print "Geocode ratio > 95%", sum(1 for key, val in geocode_ratio.items() if val > 0.95)
 
 
 # stats
     print "-----"
     print "Hyperedges"
+    print "Count:", sum(1 for n, d in stats.items() if d.get('hyperedge'))
+    """
     for network, data in sorted(stats.items()):
         if data['hyperedge']:
             print network, "\t\t", data['hyperedge']
+            """
 
     print "-----"
     print "External Nodes"
+    print "Count:", sum(1 for n, d in stats.items() if d.get('external'))
+    """
     for network, data in sorted(stats.items()):
         if data['external']:
             print network, "\t\t", data['external']
+    """
 
 
     # And range
@@ -207,7 +248,7 @@ def main():
     # Dynamic networks remain as dynamic
     all_dates += ['Dynamic' for data in summary_data.values()
                   if data['DateType'] == "Dynamic"]
-    category_counts(all_dates)
+    #category_counts(all_dates)
    
     """
     histogram = []

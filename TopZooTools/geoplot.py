@@ -93,6 +93,7 @@ opt.add_option('--image_scale',
 
 opt.add_option('--label_font_size', help="Size to plot nodes labels as", type="float", default=10)
 opt.add_option('--country_color', help="Background color for countries", type="str", default="#336699")
+opt.add_option('--default_edge_color', help="Color for edges", type="str", default="#336699")
 
 opt.add_option('--line_width', help="Size to plot lines as", type="float", default=1) 
 opt.add_option('--heatmap', action="store_true",
@@ -130,6 +131,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                label_font_size=10,
                no_watermark = False,
                show_figure=False,
+               user_default_edge_color = None,
                edge_font_size =3,
                standalone = False, # if called programatically
                edge_label_attribute=False, pdf=False, png=False):
@@ -169,6 +171,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     if external_node_scale:
         external_nodes = [n for n, data in G.nodes(data=True)
                           if 'Internal' in data and data['Internal'] == 0]
+
 
     geocoded_cities = [ n for n, data in G.nodes(data = True)
                 if 'Latitude' in data and 'Longitude' in data]
@@ -592,6 +595,12 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         elif G.graph.get('Network') == 'European NRENs':
             default_edge_color = '0.1'
 
+    if options.default_edge_color:
+        user_default_edge_color = options.default_edge_color
+
+    if user_default_edge_color:
+        default_edge_color = user_default_edge_color
+
     if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
         pass
     else:
@@ -708,9 +717,10 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     if False:
         pass
     else:
-        delta_colors = { 
-                'added': '#339966', 'removed': 'r', 'modified': '#3366ff', 
+        delta_colors = { 'added': '#339966', 'removed': 'r', 'modified': '#3366ff', 
                 '': default_edge_color} # used default color if no delta
+        delta_styles = { 'added': 'dashed', 'removed': 'dotted', 'modified': 'dashdot', 
+                '': 'solid'} # used default color if no delta
         for src, dst, data in G.edges(data=True):
             if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
                 # Hacky way to not plot edge for IL and RU
@@ -736,8 +746,14 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                 #TODO: handle this in legend
                 edge_color = default_edge_color
 
+            # Mark inferred links clearl
+            linestyle = 'solid'
+            if data.get('inferred'):
+                linestyle = 'dotted'
+
             if 'delta' in data:
                 edge_color = delta_colors[data['delta']]
+                linestyle = delta_styles[data['delta']]
 
             if 'zorder' in data:
                 zorder = data['zorder']
@@ -751,10 +767,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
             else:
                 curr_line_width = line_width
 
-            # Mark inferred links clearl
-            linestyle = 'solid'
-            if 'inferred' in data and data['inferred']:
-                linestyle = 'dotted'
+
 
             if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
                 #linestyle = 'dashed'
@@ -951,14 +964,51 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         delta_colors = { 
                 'added': '#339966', 'removed': 'r', 'modified': '#3366ff', 
                 '': node_color} # used default color if no delta
-        node_deltas = [d.get("delta") for n,d in G.nodes(data=True)]
-        node_color = [delta_colors[delta] for delta in node_deltas]
-        plotted_nodes = nx.draw_networkx_nodes(G, pos, 
-                                               nodelist = geocoded_cities,
-                                               node_size = node_size, 
-                                               #alpha = 0.8, 
-                                               linewidths = (0,0),
-                                               node_color = node_color)
+        node_deltas = dict( (n, d.get("delta")) for n,d in G.nodes(data=True))
+        if len(node_deltas):
+# unchanged
+            plotted_nodes = nx.draw_networkx_nodes(G, pos, 
+                    nodelist = [n for n, d in node_deltas.items() if not d ],
+                    node_size = node_size, 
+                    #alpha = 0.8, 
+                    linewidths = (0,0),
+                    node_shape = 'o',
+                    node_color = node_color)
+
+# modified
+            plotted_nodes = nx.draw_networkx_nodes(G, pos, 
+                    nodelist = [n for n, d in node_deltas.items() if d == "modified"],
+                    node_size = node_size, 
+                    #alpha = 0.8, 
+                    linewidths = (0,0),
+                    node_shape = 's',
+                    node_color = delta_colors['modified'])
+
+# added
+            plotted_nodes = nx.draw_networkx_nodes(G, pos, 
+                    nodelist = [n for n, d in node_deltas.items() if d == "added"],
+                    node_size = node_size, 
+                    #alpha = 0.8, 
+                    linewidths = (0,0),
+                    node_shape = 'd',
+                    node_color = delta_colors['added'])
+
+# removed
+            plotted_nodes = nx.draw_networkx_nodes(G, pos, 
+                    nodelist = [n for n, d in node_deltas.items() if d == "removed"],
+                    node_size = node_size, 
+                    #alpha = 0.8, 
+                    linewidths = (0,0),
+                    node_shape = '^',
+                    node_color = delta_colors['removed'])
+
+        else:
+            plotted_nodes = nx.draw_networkx_nodes(G, pos, 
+                    nodelist = geocoded_cities,
+                    node_size = node_size, 
+                    #alpha = 0.8, 
+                    linewidths = (0,0),
+                    node_color = node_color)
 
 
 
@@ -1029,7 +1079,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                                         curr_y + extra_custom_offsets[label][1])
 
 
-        elif 'Network' in G.graph and G.graph['Network'] == 'GARR' and False:
+        elif False and 'Network' in G.graph and G.graph['Network'] == 'GARR':
             #TODO: see if this is still needed
             # hacky way to put labels on left or right
             label_pos = dict( (key, (x+40000, y)) for key, (x,y)
@@ -1056,7 +1106,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         else:
             label_pos = pos
 
-        nx.draw_networkx_labels(G, label_pos, 
+            nx.draw_networkx_labels(G, label_pos, 
                                 labels=labels,
                                 font_size = label_font_size,
                                 font_color = font_color,
@@ -1230,6 +1280,7 @@ def main():
     #TODO: add logger debug
 
     #TODO: add support for legend through options
+
 
     lats_all = []
     lons_all = []
