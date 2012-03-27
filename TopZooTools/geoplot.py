@@ -8,6 +8,7 @@ import glob
 import optparse
 import sys
 import math
+import pprint
 
 from collections import defaultdict
 import numpy as np
@@ -94,6 +95,8 @@ opt.add_option('--image_scale',
 opt.add_option('--label_font_size', help="Size to plot nodes labels as", type="float", default=10)
 opt.add_option('--country_color', help="Background color for countries", type="str", default="#336699")
 opt.add_option('--default_edge_color', help="Color for edges", type="str", default="#336699")
+opt.add_option('--edge_label_order', help="Ordering for edge colors", type="str", default="")
+opt.add_option('--edge_colormap', help="Colormap for edge colors. Note most colormaps have a reverse _r eg cool_r", type="str", default="")
 
 opt.add_option('--line_width', help="Size to plot lines as", type="float", default=1) 
 opt.add_option('--heatmap', action="store_true",
@@ -132,7 +135,9 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                no_watermark = False,
                show_figure=False,
                user_default_edge_color = None,
+               edge_label_order = [],
                edge_font_size =3,
+               edge_colormap = None,
                standalone = False, # if called programatically
                edge_label_attribute=False, pdf=False, png=False):
 
@@ -165,6 +170,11 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
 
     #TODO: look at case where direct link A->B with geocoded co-ords
     # gets overwritten with inferred nodes if multiple paths between A-B
+    try:
+        edge_label_order.upper() # test if string-like
+        edge_label_order = [x.strip() for x in edge_label_order.split(",")]
+    except AttributeError:
+        pass # not string-like
 
     # Remove any external nodes
     external_nodes = []
@@ -595,6 +605,9 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         elif G.graph.get('Network') == 'European NRENs':
             default_edge_color = '0.1'
 
+    if edge_colormap:
+        colormap = plt.get_cmap(edge_colormap)
+
     if options.default_edge_color:
         user_default_edge_color = options.default_edge_color
 
@@ -655,15 +668,32 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         #TODO: look at logarithmic scale here
         #legend = None
         speed_colors = {}
+        speed_widths = {}
+        if not len(speeds):
+            #TODO: refactor edge labels to general case not just speeds
+# See if edge_label_order specified in graph
+            edge_labels = sorted(list(set(d.get("LinkLabel") for s,t,d in G.edges(data=True))))
+            if edge_label_order:
+                edge_labels = sorted(edge_labels, key = lambda x: edge_label_order.index(x))
+                speeds = edge_labels
+                speed_labels = dict( (speed, speed) for speed in speeds)
+                no_speed_edge_present = False # don't plot unknown on legend: TODO check this is ok
+            else:
+                print "Edge labels enabled, but no link speeds found. Using ordering:", ", ".join(edge_labels)
 
         if len(speeds) > 0:
             render_legend = True
             speeds_norm = colors.normalize(0, len(speeds))
 
-            for index, raw_speed in enumerate(sorted(speeds)):
+            if not edge_label_order:
+# no ordering specified, sort speeds
+                speeds = sorted(speeds)
+
+            for index, raw_speed in enumerate((speeds)):
                 edge_color = colormap(speeds_norm(index))
                 # store color for use when plotting
                 speed_colors[raw_speed] = edge_color
+                speed_widths[raw_speed] = 0.8*index
 
                 #TODO: make legend size relate to node size so don't have big
                 # legend
@@ -671,7 +701,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                 legend['shapes'].append( plt.Rectangle((0, 0), 0.51, 0.51, 
                                                     fc = edge_color))
                 legend['labels'].append( speed_labels[raw_speed])
-
 
             if no_speed_edge_present:
                 legend['shapes'].append( plt.Rectangle((0, 0), 0.51, 0.51, 
@@ -698,7 +727,8 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         #p3 = plt.Rectangle((0, 0), 0.51, 0.51, fc="r")
         legend = plt.legend(legend['shapes'], legend['labels'],
                 fancybox=True,
-                ncol=4,
+                #ncol=len(speed_labels)/2,
+                ncol=len(speed_labels),
                 prop = fontP,
                 loc='upper center', bbox_to_anchor=(0.5, -0.05),
                 )
@@ -742,6 +772,9 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                 edge_color = data['edge_color']
             elif opt_edge_speeds and 'LinkSpeedRaw' in data:
                 edge_color = speed_colors[data['LinkSpeedRaw']]
+            elif opt_edge_speeds and edge_label_order:
+# edge "speeds" indexed by label
+                edge_color = speed_colors[data['LinkLabel']]
             else:
                 #TODO: handle this in legend
                 edge_color = default_edge_color
@@ -767,7 +800,13 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
             else:
                 curr_line_width = line_width
 
-
+# scale based on colors
+            if len(speed_widths):
+                if opt_edge_speeds and 'LinkSpeedRaw' in data:
+                    curr_line_width = curr_line_width + speed_widths[data['LinkSpeedRaw']]
+                elif opt_edge_speeds and edge_label_order:
+                    # edge "speeds" indexed by label
+                    curr_line_width = curr_line_width + speed_widths[data['LinkLabel']]
 
             if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
                 #linestyle = 'dashed'
@@ -795,7 +834,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                 #       + " " + G.node[dst]['label'])
                 m.drawgreatcircle(lon1, lat1, lon2, lat2, color = edge_color,
                                   linewidth=curr_line_width,
-                                  #alpha = 0.6,
+                                  alpha = 0.8,
                                   linestyle = linestyle,
                                   #dashes=(4,1),
                                   zorder=zorder)
@@ -1324,12 +1363,14 @@ def main():
                    external_node_scale=options.external_node_scale,
                    numeric_labels = options.numeric_labels,
                    opt_edge_speeds = options.edge_speeds,
+                   edge_label_order = options.edge_label_order,
                    basemap_resolution_level = options.res,
                    node_size = options.node_size,
                    line_width = options.line_width,
                    manual_image_scale = options.image_scale,
                    label_font_size = options.label_font_size,
                    pdf=options.pdf,
+                   edge_colormap = options.edge_colormap,
                    country_color = options.country_color,
                    no_watermark = options.no_watermark,
                    pickle_dir=pickle_dir,
