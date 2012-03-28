@@ -416,7 +416,7 @@ def main():
 
         # extract edge data
         for src, dst, key, data in graph.edges(data=True, keys=True):
-            if 'label' in data:
+            if data.get("label"):
                 label = data['label']
                 extracted_data = extract_edge_data(label)
                 # Replace the edge data with extracted

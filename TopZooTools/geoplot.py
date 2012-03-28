@@ -784,14 +784,17 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
             if data.get('inferred'):
                 linestyle = 'dotted'
 
-            if 'delta' in data:
-                edge_color = delta_colors[data['delta']]
-                linestyle = delta_styles[data['delta']]
+
 
             if 'zorder' in data:
                 zorder = data['zorder']
             else:
                 zorder = 1
+
+            if 'delta' in data:
+                edge_color = delta_colors[data['delta']]
+                linestyle = delta_styles[data['delta']]
+                zorder = zorder + 0.1 #ensure diffs go on top of solid lines
             
             if 'edge_width' in data:
                 # Multiplier not absolute width

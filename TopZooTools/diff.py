@@ -37,7 +37,7 @@ def main():
         pairs = [(a, b) for (a, b) in zip(files, files[1:])]
         for fileA, fileB in pairs:
             compare(fileA, fileB)
-                
+            print "---------------"
         
 # See if A is a wildcard -> glob
 
@@ -94,18 +94,22 @@ def compare(fileA, fileB):
     for label in labels_common:
         nodeA = label_mappingA[label]
         nodeB = label_mappingB[label]
-        dataA = graphA[nodeA]
-        dataB = graphB[nodeB]
+        dataA = graphA.node[nodeA]
+        dataB = graphB.node[nodeB]
         keysA = set(dataA.keys())
         keysB = set(dataB.keys())
         #print dataA, dataB
         added = keysB - keysA
         removed = keysA - keysB
         same = keysA & keysB
-        modified = [key for key in same if dataA[key] != dataB[key]]
+        modified = [key for key in same if dataA[key] != dataB[key] and key != 'id']
         if len(added) or len(removed) or len(modified):
             #TODO: check handling for multi-edge
+            print "modified", label
+            pprint.pprint(dataA)
+            pprint.pprint(dataB)
             labels_modified.add(label)
+    print "Nodes modified:", ", ".join(sorted(labels_modified))
 
 # need common nodes for edge comparisons
 
@@ -237,7 +241,7 @@ def compare(fileA, fileB):
                     line_width = 3,
                     node_size = 150,
                     edge_font_size=8,
-                    basemap_resolution_level = 3,
+                    basemap_resolution_level = 1,
                     pdf=True,
                     country_color="#cccccc",
                     user_default_edge_color = "k",
