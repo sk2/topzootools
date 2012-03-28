@@ -94,7 +94,7 @@ opt.add_option('--image_scale',
 
 opt.add_option('--label_font_size', help="Size to plot nodes labels as", type="float", default=10)
 opt.add_option('--country_color', help="Background color for countries", type="str", default="#336699")
-opt.add_option('--default_edge_color', help="Color for edges", type="str", default="#336699")
+opt.add_option('--default_edge_color', help="Color for edges", type="str", default="")
 opt.add_option('--edge_label_order', help="Ordering for edge colors", type="str", default="")
 opt.add_option('--edge_colormap', help="Colormap for edge colors. Note most colormaps have a reverse _r eg cool_r", type="str", default="")
 
@@ -647,6 +647,8 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     legend = {}
     legend['shapes'] = []
     legend['labels'] = []
+    speed_colors = {}
+    speed_widths = {}
 
     if opt_edge_speeds:
         # Find all edge speeds
@@ -749,7 +751,8 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     else:
         delta_colors = { 'added': '#339966', 'removed': 'r', 'modified': '#3366ff', 
                 '': default_edge_color} # used default color if no delta
-        delta_styles = { 'added': 'dashed', 'removed': 'dotted', 'modified': 'dashdot', 
+        #delta_styles = { 'added': 'dashed', 'removed': 'dotted', 'modified': 'dashdot', 
+        delta_styles = { 'added': 'solid', 'removed': 'solid', 'modified': 'solid', 
                 '': 'solid'} # used default color if no delta
         for src, dst, data in G.edges(data=True):
             if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
@@ -784,17 +787,15 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
             if data.get('inferred'):
                 linestyle = 'dotted'
 
-
-
             if 'zorder' in data:
                 zorder = data['zorder']
             else:
-                zorder = 1
+                zorder = 1.1
 
             if 'delta' in data:
                 edge_color = delta_colors[data['delta']]
                 linestyle = delta_styles[data['delta']]
-                zorder = zorder + 0.1 #ensure diffs go on top of solid lines
+                zorder = zorder - 0.01 #ensure diffs go on top of solid lines
             
             if 'edge_width' in data:
                 # Multiplier not absolute width
