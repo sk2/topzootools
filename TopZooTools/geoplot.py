@@ -176,6 +176,9 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     except AttributeError:
         pass # not string-like
 
+    
+#TODO: make easy way to turn on/off custom geant plotting: use config settings?
+
     # Remove any external nodes
     external_nodes = []
     if external_node_scale:
@@ -564,7 +567,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     else:
         #TODo: fix bug where if using straight line it gets drawn under
         # continent fill
-        if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
+        if False and 'Network' in G.graph and G.graph['Network'] == 'GEANT':
             m.fillcontinents(color='#9ACEEB')
         elif G.graph.get('Network') == 'European NRENs':
             m.fillcontinents(color='#9ACEEB')
@@ -600,7 +603,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         #colormap = cm.summer
         #country_color = '#AAAAAA'
         #country_color = '#DDDDDD'
-        if G.graph.get('Network') == 'GEANT':
+        if False and G.graph.get('Network') == 'GEANT':
             default_edge_color = '0.3'
         elif G.graph.get('Network') == 'European NRENs':
             default_edge_color = '0.1'
@@ -614,25 +617,12 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     if user_default_edge_color:
         default_edge_color = user_default_edge_color
 
-    if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
-        pass
-    else:
-        m.drawcountries(linewidth = 0.05, zorder=1.5, color = country_color)
+    #if False and 'Network' in G.graph and G.graph['Network'] == 'GEANT':
+        #pass
+    #else:
+    m.drawcountries(linewidth = 0.05, zorder=1.5, color = country_color)
         #m.drawcoastlines(linewidth = 0.1, zorder=1, color = country_color)
 
-    #TODO: look at pickling and using
-    """
-        states = LineCollection(self.statesegs,antialiaseds=(antialiased,))
-        states.set_color(color)
-        states.set_linewidth(linewidth)
-        states.set_label('_nolabel_')
-        if zorder is not None:
-            states.set_zorder(zorder)
-        ax.add_collection(states)
-        # set axes limits to fit map region.
-        self.set_axes_limits(ax=ax)
-        return states         
-    """
 
     """
     Colormap based on
@@ -755,7 +745,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         delta_styles = { 'added': 'solid', 'removed': 'solid', 'modified': 'solid', 
                 '': 'solid'} # used default color if no delta
         for src, dst, data in G.edges(data=True):
-            if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
+            if False and 'Network' in G.graph and G.graph['Network'] == 'GEANT':
                 # Hacky way to not plot edge for IL and RU
                 edge_skips_nodes = set(["RU", "IL"])
                 if (G.node[src]['label'] in edge_skips_nodes 
@@ -906,13 +896,13 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                         node_color = node_color)
                         """
 
-    if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
+    if False and G.graph.get('Network') == 'GEANT':
         node_size = 50 
         node_color = 'k'
         # Custom labels
         # also do custom legend
         router_nodes = [n for n, d in G.nodes_iter(data=True)
-                        if d['type'] in set(['Fully Featured',
+                        if d.get('type') in set(['Fully Featured',
                                              'IP/MPLS only',
                                              'Off fibre net'])]
         nx.draw_networkx_nodes(G, pos, nodelist = router_nodes,
@@ -923,7 +913,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                                node_shape='s',) 
 
         routerless_nodes = [n for n, d in G.nodes_iter(data=True)
-                            if d['type'] in set(['Routerless',
+                            if d.get('type') in set(['Routerless',
                                                  'Routerless Off Fibre net'])]
         nx.draw_networkx_nodes(G, pos, nodelist = routerless_nodes,
                                node_size = node_size, 
@@ -933,7 +923,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                                node_shape='o',) 
 
         nren_pop_nodes = [n for n, d in G.nodes_iter(data=True)
-                          if d['type'] == "NREN POPs"]
+                          if d.get('type') == "NREN POPs"]
         nx.draw_networkx_nodes(G, pos, nodelist = nren_pop_nodes,
                                node_size = node_size, 
                                #alpha = 0.8, 
@@ -942,7 +932,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                                node_shape='^',) 
 
         nordu_nodes = [n for n, d in G.nodes_iter(data=True)
-                       if d['type'] == "NORDUnet"]
+                       if d.get('type') == "NORDUnet"]
         nodes = nx.draw_networkx_nodes(G, pos, nodelist = nordu_nodes,
                                node_size = node_size, 
                                #alpha = 0.8, 
@@ -1078,7 +1068,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                             node_shape='s')  
 
     if use_labels:
-        if 'Network' in G.graph and G.graph['Network'] == 'GEANT':
+        if False and 'Network' in G.graph and G.graph['Network'] == 'GEANT':
             # hacky way to put labels on left or right
             label_pos = dict( (key, (x+140000, y)) for key, (x,y)
                              in pos.items())
