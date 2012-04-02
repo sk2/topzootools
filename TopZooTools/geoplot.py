@@ -20,6 +20,8 @@ __all__ = ['plot_graph']
 
 # Hide axes as per http://matplotlib.sourceforge.net/users/customizing.html
 plt.rc('axes',linewidth=0)
+
+
 #plt.rcParams['font.sans-serif'] = 'Helvetica'
 #plt.rcParams['font.sans-serif'] = 'Times'
 #TODO: allow this to be selectable from command line
@@ -77,8 +79,8 @@ opt.add_option('--labels', action="store_true",
 opt.add_option('--numeric_labels', action="store_true",
                default=False, help="Use numeric node labels")
 
-opt.add_option('--debuglabels', action="store_true",
-               default=False, help="Print debugging (numeric) node labels")
+opt.add_option('--debuglabels', action="store_true", default=False, help="Print debugging (numeric) node labels")
+opt.add_option('--no_update', action="store_true", default=False, help="Only render image if destination file not present (don't update existing images). Faster for batch-processing large datasets.")
 
 opt.add_option('--no_watermark', action="store_false",
                default=True, help="Topology Zoo URL watermark")
@@ -133,6 +135,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                country_color = "#666666",
                label_font_size=10,
                no_watermark = False,
+               no_update = False,
                show_figure=False,
                user_default_edge_color = None,
                edge_label_order = [],
@@ -176,7 +179,19 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     except AttributeError:
         pass # not string-like
 
-    
+    out_file = "{0}/{1}".format(output_path, network_name.replace(" ", "_"))
+    plt_filename_pdf = plt_filename_png = None
+    if pdf:
+        plt_filename_pdf = "%s.pdf" % out_file
+    if png:
+        plt_filename_png = "%s.png" % out_file
+    if no_update:
+# see if destination already exists
+        if ((plt_filename_pdf and os.path.exists(plt_filename_pdf)) or 
+                (plt_filename_png and os.path.exists(plt_filename_png))):
+            print "Output file already exists for %s, skipping" % network_name
+            return
+
 #TODO: make easy way to turn on/off custom geant plotting: use config settings?
 
     # Remove any external nodes
@@ -950,7 +965,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         plt.scatter(-100000,-1000, s=50, linewidths = (0,0),
                     marker='d', c='g', label='NORDUnet')
         fontP = FontProperties()
-        fontP.set_size('small')
+        fontP.set_size('large')
 
         #p1 =    p2 = plt.Rectangle((0, 0), 0.51, 0.51, fc="g")
         #p3 = plt.Rectangle((0, 0), 0.51, 0.51, fc="r")
@@ -1203,12 +1218,11 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                 verticalalignment='top',
                 transform=ax.transAxes)
 
-    out_file = "{0}/{1}".format(output_path, network_name.replace(" ", "_"))
     #logger.info( "Plotting to %s " % out_file)
     # legend code from
     # http://www.mail-archive.com/matplotlib-users@lists.sourceforge.net/msg15262.html
     if pdf:
-        plt_file_pdf = open(out_file + ".pdf", "w")
+        plt_file_pdf = open(plt_filename_pdf, "w")
         #logger.info( "Plotting %s.pdf" % out_file)
         if render_legend:
             plt.savefig( plt_file_pdf, format = 'pdf',
@@ -1223,20 +1237,9 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                         facecolor = "w", dpi = 300,
                         pad_inches=0,
                     )
-    """
-    if opt_eps:
-        plt_file_eps = open(out_file + ".eps", "w")
-        plt.savefig( plt_file_eps, format = 'eps', bbox_inches='tight',
-                    facecolor = "w", dpi = 300, pad_inches=0)
 
-    if opt_jpg:
-        plt_file_jpg = open(out_file + ".jpg", "w")
-        plt.savefig( plt_file_jpg, bbox_inches='tight',
-                    facecolor = "w", dpi = 300, pad_inches=0)
-
-    """
     if png:
-        plt_file_png = open(out_file + ".png", "w")
+        plt_file_png = open(plt_filename_png, "w")
         #logger.info( "Plotting %s.png" % out_file)
         plt.savefig( plt_file_png, format = 'png',
                     bbox_inches='tight',
@@ -1363,6 +1366,7 @@ def main():
                    line_width = options.line_width,
                    manual_image_scale = options.image_scale,
                    label_font_size = options.label_font_size,
+                   no_update = options.no_update,
                    pdf=options.pdf,
                    edge_colormap = options.edge_colormap,
                    country_color = options.country_color,
@@ -1402,7 +1406,6 @@ def main():
         lon_0 = (urcrnrlon + llcrnrlon)/2
 
         # Draw the map 
-
 
         #TODO: work out why errors happening
         try:
