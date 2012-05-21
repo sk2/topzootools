@@ -727,16 +727,14 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
 
     if render_legend:
         # Smaller legend font
-        fontP = FontProperties()
-        fontP.set_size('small')
 
         #p1 =    p2 = plt.Rectangle((0, 0), 0.51, 0.51, fc="g")
         #p3 = plt.Rectangle((0, 0), 0.51, 0.51, fc="r")
         legend = plt.legend(legend['shapes'], legend['labels'],
                 fancybox=True,
-                #ncol=len(speed_labels)/2,
-                ncol=len(speed_labels),
-                prop = fontP,
+                ncol=len(speed_labels)/2,
+                #ncol=len(speed_labels),
+                prop = {'size':20},
                 loc='upper center', bbox_to_anchor=(0.5, -0.05),
                 )
 
