@@ -77,6 +77,8 @@ def main():
 #pprint.pprint(sorted(graph_combined.nodes()))
 
     print "Stitched networks:", ", ".join(stitched_networks)
+# dictionary keyed by lowercase network, useful for suggesting capitalisation errors
+    stitched_networks_lower = dict( (net.lower(), net) for net in stitched_networks)
 
 #FIX "None" labels
     for node, data in graph_combined.nodes(data=True):
@@ -94,13 +96,18 @@ def main():
     csv_file = open( options.csv, "rU" )
     csv_reader = csv.reader(csv_file, dialect='excel')
     for line in csv_reader:
+        line = [elem.strip() for elem in line]
         network_a, node_label_a, network_b, node_label_b = line
 #check networks exist
         if network_a not in stitched_networks:
             print "Network", network_a, "not present"
+            if network_a.lower() in stitched_networks_lower:
+                print "Did you mean '%s'?"% stitched_networks_lower[network_a.lower()]
             continue
         if network_b not in stitched_networks:
             print "Network", network_b, "not present"
+            if network_b.lower() in stitched_networks_lower:
+                print "Did you mean '%s'?"% stitched_networks_lower[network_b.lower()]
             continue
 
         node_id_a = "".join([network_a, network_delimeter, node_label_a])
@@ -123,10 +130,8 @@ def main():
 
         #Join
         print "Connecting", node_label_a, "in", network_a, "to", node_label_b, "in", network_b
-        graph_combined.add_edge(node_id_a, node_id_b)
+        graph_combined.add_edge(node_id_a, node_id_b, edge_color='r')
 # print edges
-    for src, dst in sorted(graph_combined.edges()):
-        print src, "to", dst
 
     print "Disconnected nodes", ", ".join([ n for n in graph_combined
         if graph_combined.degree(n) == 0])

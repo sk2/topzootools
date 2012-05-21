@@ -692,9 +692,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                                                     fc = default_edge_color)) 
                 legend['labels'].append( "Unknown")
 
-    pprint.pprint(sorted((G.node[src]['Network'], G.node[src]['label'],
-        G.node[dst]['Network'], G.node[dst]['label'])
-            for src, dst in G.edges()))
     """
 
     #TODO: add hyperedge and inferred nodes to list if present
