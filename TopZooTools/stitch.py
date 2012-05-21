@@ -47,13 +47,22 @@ for source_file in sorted(network_files):
 
 #TODO: only keep internal nodes
 
-    print len(graph)
     mapping = dict( (n, nx.utils.misc.generate_unique_node()) for n in graph)
     nx.relabel_nodes(graph, mapping, copy=False)
     graph_combined = nx.union(graph_combined, graph)
-    print graph_combined.nodes()
 
 
+#FIX "None" labels
+for node, data in graph_combined.nodes(data=True):
+    label = data.get("label")
+    if not label:
+        continue
+    
+    if label == "None":
+        graph_combined.node[node]["label"] = ""
+# and escape
+    if "&" in label:
+        graph_combined.node[node]["label"] = label.replace("&", "&gt;")
 
-pprint.pprint(graph_combined.nodes())
+#pprint.pprint(graph_combined.nodes())
 nx.write_gml(graph_combined, "graph_combined.gml")
