@@ -28,7 +28,7 @@ if not os.path.isdir(pickle_dir):
     os.mkdir(pickle_dir)
 
 graph_combined = nx.MultiGraph()
-graph_combined.add_edge("A", "B")
+network_delimeter = "___" # seperate network and name in node names
 
 for source_file in sorted(network_files):
     # Extract name of network from file path
@@ -53,16 +53,17 @@ for source_file in sorted(network_files):
     mapping = {}
     for n, d in graph.nodes(data=True):
         if d.get("label"):
-            mapping[n] = d['label']
+            mapping[n] = d['label'].strip()
         else:
             mapping[n] = n # for hyperedges, etc, retain the id
 
     nx.relabel_nodes(graph, mapping, copy=False)
-    graph_combined = nx.union(graph_combined, graph, rename=("", "%s_" %network_name))
+    network_prefix = "%s%s" % (network_name, network_delimeter)
+    graph_combined = nx.union(graph_combined, graph, rename=("", network_prefix))
 
 #TODO: look at renaming with labels, eg geant_at, this will simplify the connection process!
 
-pprint.pprint(graph_combined.nodes())
+pprint.pprint(sorted(graph_combined.nodes()))
 
 #FIX "None" labels
 for node, data in graph_combined.nodes(data=True):
@@ -76,5 +77,8 @@ for node, data in graph_combined.nodes(data=True):
     if "&" in label:
         graph_combined.node[node]["label"] = label.replace("&", "&gt;")
 
+
+
 #pprint.pprint(graph_combined.nodes())
+nx.write_graphml(graph_combined, "graph_combined.graphml")
 nx.write_gml(graph_combined, "graph_combined.gml")
