@@ -10,7 +10,6 @@ import csv
 import pprint
 import optparse
 
-
 opt = optparse.OptionParser()
 
 opt.add_option('--directory', '-d',
@@ -129,10 +128,17 @@ def main():
     for src, dst in sorted(graph_combined.edges()):
         print src, "to", dst
 
-#pprint.pprint(graph_combined.nodes())
-    nx.write_graphml(graph_combined, os.path.join(output_dir, "graph_combined.graphml"))
-    nx.write_gml(graph_combined, os.path.join(output_dir, "graph_combined.gml"))
+    print "Disconnected nodes", ", ".join([ n for n in graph_combined
+        if graph_combined.degree(n) == 0])
 
+#pprint.pprint(graph_combined.nodes())
+    print "Saving as single-edge graph"
+    graph_combined = nx.Graph(graph_combined) #single edge for now
+    nx.write_graphml(graph_combined, os.path.join(output_dir, "graph_combined.graphml"))
+# Reset id attribute, as write_gml uses this as node id -> collides, reduced node count
+    for n in graph_combined:
+        del graph_combined.node[n]['id']
+    nx.write_gml(graph_combined, os.path.join(output_dir, "graph_combined.gml"))
 
 if __name__ == "__main__":
     try:
