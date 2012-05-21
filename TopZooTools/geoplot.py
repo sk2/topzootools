@@ -509,28 +509,6 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                     urcrnrlat = urcrnrlat,  llcrnrlon = llcrnrlon,
                     urcrnrlon = urcrnrlon, lat_ts = lat_1)
 
-        """
-        TODO: remove cache code
-        map_id = hash(
-            hash(basemap_resolution) ^ hash(llcrnrlat) ^ hash(llcrnrlon) ^
-            hash(urcrnrlat) ^ hash(urcrnrlon) ^ hash(lat_1))
-        # remove - from filename
-        if map_id < 0:
-            map_id = -1*map_id
-        pickle_file = "{0}/{1}.pickle".format(pickle_dir, map_id)
-        if (os.path.isfile(pickle_file)):
-            # Pickle file exists
-            m = cPickle.load(open(pickle_file,'rb'))
-        else:
-            m = Basemap(resolution = basemap_resolution,
-                        projection='merc', llcrnrlat = llcrnrlat,
-                        urcrnrlat = urcrnrlat,  llcrnrlon = llcrnrlon,
-                        urcrnrlon = urcrnrlon, lat_ts = lat_1)
-            if pickle_dir:
-                # See if cached basemap for this file
-                cPickle.dump(m,open(pickle_file,'wb'))
-        """
-
     except ZeroDivisionError, e:
         print "Error {0}".format(e)
         # Do the next map
@@ -713,6 +691,10 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                 legend['shapes'].append( plt.Rectangle((0, 0), 0.51, 0.51, 
                                                     fc = default_edge_color)) 
                 legend['labels'].append( "Unknown")
+
+    pprint.pprint(sorted((G.node[src]['Network'], G.node[src]['label'],
+        G.node[dst]['Network'], G.node[dst]['label'])
+            for src, dst in G.edges()))
     """
 
     #TODO: add hyperedge and inferred nodes to list if present
