@@ -117,6 +117,8 @@ def main():
     csv_file = open( options.csv, "rU" )
     csv_reader = csv.reader(csv_file, dialect='excel')
     for line in csv_reader:
+        if line[0].startswith("#"):
+            continue # commented line
         line = [elem.strip() for elem in line]
         network_a, node_label_a, network_b, node_label_b = line
 #check networks exist
