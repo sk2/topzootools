@@ -46,11 +46,23 @@ for source_file in sorted(network_files):
         nx.write_gpickle(graph, pickle_file)
 
 #TODO: only keep internal nodes
+    network_name = graph.graph['Network']
+    print network_name
 
-    mapping = dict( (n, nx.utils.misc.generate_unique_node()) for n in graph)
+    #mapping = dict( (n, nx.utils.misc.generate_unique_node()) for n in graph)
+    mapping = {}
+    for n, d in graph.nodes(data=True):
+        if d.get("label"):
+            mapping[n] = d['label']
+        else:
+            mapping[n] = n # for hyperedges, etc, retain the id
+
     nx.relabel_nodes(graph, mapping, copy=False)
-    graph_combined = nx.union(graph_combined, graph)
+    graph_combined = nx.union(graph_combined, graph, rename=("", "%s_" %network_name))
 
+#TODO: look at renaming with labels, eg geant_at, this will simplify the connection process!
+
+pprint.pprint(graph_combined.nodes())
 
 #FIX "None" labels
 for node, data in graph_combined.nodes(data=True):
