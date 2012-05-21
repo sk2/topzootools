@@ -16,7 +16,14 @@ opt.add_option('--directory', '-d',
             help="Directory containing .gml files to join")
 
 opt.add_option('--csv', '-c',
-            help="CSV file for stitching")
+            help="CSV file of interconnects for stitching")
+
+opt.add_option('--asn', '-a',
+            help="CSV file of ASN number to network mappings")
+
+#TODO: include example CSV formats
+
+
 
 options = opt.parse_args()[0]
 
@@ -35,6 +42,14 @@ def main():
     graph_combined = nx.MultiGraph()
     stitched_networks = []
     network_delimeter = "___" # seperate network and name in node names
+
+    network_to_asn_mapping = {}
+    csv_file = open( options.asn, "rU" )
+    csv_reader = csv.reader(csv_file, dialect='excel')
+    for line in csv_reader:
+        line = [elem.strip() for elem in line]
+        network, asn = line
+        network_to_asn_mapping[network] = asn
 
     for source_file in sorted(network_files):
         # Extract name of network from file path
@@ -57,6 +72,9 @@ def main():
 
         network_name = graph.graph['Network']
         stitched_networks.append(network_name)
+        if network_name in network_to_asn_mapping:
+            for n in graph:
+                graph.node[n]['ASN'] = network_to_asn_mapping[network_name]
 
         #mapping = dict( (n, nx.utils.misc.generate_unique_node()) for n in graph)
         mapping = {}
