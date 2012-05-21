@@ -74,7 +74,10 @@ def main():
         stitched_networks.append(network_name)
         if network_name in network_to_asn_mapping:
             for n in graph:
-                graph.node[n]['ASN'] = network_to_asn_mapping[network_name]
+                graph.node[n]['asn'] = network_to_asn_mapping[network_name]
+        else:
+            print network_name, "not in ASN mapping"
+
 
         #mapping = dict( (n, nx.utils.misc.generate_unique_node()) for n in graph)
         mapping = {}
