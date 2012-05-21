@@ -11,3 +11,4 @@ dist/*
 *.swp
 *.egg-info/*
 *.pdf
+TopZooTools/graph_combined.gml

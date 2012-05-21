@@ -322,6 +322,7 @@ def main():
         network_files.append(options.file)
 
     if options.directory:
+        #TODO: make this os.path.join across all zootools to remove need for trailing /
         network_files = glob.glob(options.directory + "*.graphml")
 
     if len(network_files) == 0:
