@@ -23,8 +23,6 @@ opt.add_option('--asn', '-a',
 
 #TODO: include example CSV formats
 
-
-
 options = opt.parse_args()[0]
 
 def main():
@@ -156,8 +154,10 @@ def main():
         graph_combined.add_edge(node_id_a, node_id_b, edge_color='r')
 # print edges
 
-    print "Disconnected nodes", ", ".join([ n for n in graph_combined
-        if graph_combined.degree(n) == 0])
+    disconnected_nodes = [ n for n in graph_combined if graph_combined.degree(n) == 0]
+    print "Removing disconnected nodes:", ", ".join(disconnected_nodes)
+    graph_combined.remove_nodes_from(disconnected_nodes)
+
 
 #pprint.pprint(graph_combined.nodes())
     print "Saving as single-edge graph"
