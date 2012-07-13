@@ -703,6 +703,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     #    #                                   markevery=2) )
     #    legend['labels'].append( "Inferred position")
     """
+    delta_zorders = { 'added': 0.2, 'removed': 0.3, 'modified': 0.1, '': 0} # used default color if no delta
 
     if render_legend:
         # Smaller legend font
@@ -736,6 +737,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
         #delta_styles = { 'added': 'dashed', 'removed': 'dotted', 'modified': 'dashdot', 
         delta_styles = { 'added': 'solid', 'removed': 'solid', 'modified': 'solid', 
                 '': 'solid'} # used default color if no delta
+
         for src, dst, data in G.edges(data=True):
             if False and 'Network' in G.graph and G.graph['Network'] == 'GEANT':
                 # Hacky way to not plot edge for IL and RU
@@ -775,9 +777,10 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                 zorder = 1.1
 
             if 'delta' in data:
-                edge_color = delta_colors[data['delta']]
-                linestyle = delta_styles[data['delta']]
-                zorder = zorder - 0.01 #ensure diffs go on top of solid lines
+                delta = data['delta']
+                edge_color = delta_colors[delta]
+                linestyle = delta_styles[delta]
+                zorder = zorder + delta_zorders[delta] #ensure diffs go on top of solid lines
             
             if 'edge_width' in data:
                 # Multiplier not absolute width
@@ -998,6 +1001,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                     #alpha = 0.8, 
                     linewidths = (0,0),
                     node_shape = 'o',
+                    zorder = delta_zorders[''],
                     node_color = node_color)
 
 # modified
@@ -1007,6 +1011,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                     #alpha = 0.8, 
                     linewidths = (0,0),
                     node_shape = 's',
+                    zorder = delta_zorders['modified'],
                     node_color = delta_colors['modified'])
 
 # added
@@ -1016,6 +1021,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                     #alpha = 0.8, 
                     linewidths = (0,0),
                     node_shape = 'd',
+                    zorder = delta_zorders['added'],
                     node_color = delta_colors['added'])
 
 # removed
@@ -1024,6 +1030,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                     node_size = node_size, 
                     #alpha = 0.8, 
                     linewidths = (0,0),
+                    zorder = delta_zorders['removed'],
                     node_shape = '^',
                     node_color = delta_colors['removed'])
 
@@ -1350,7 +1357,7 @@ def main():
                    no_watermark = options.no_watermark,
                    pickle_dir=pickle_dir,
                    png=options.png,
-                   standalone = True,
+                   standalone = False,
             )
 
     # try heatmap

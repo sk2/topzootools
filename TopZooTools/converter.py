@@ -326,6 +326,22 @@ def main():
             graph = nx.read_gml(net_file)
             nx.write_gpickle(graph, pickle_file)
 
+        # handle problem if reading in with node_default or edge_default as list
+# TODO: see if nx bug - as can't write graphml if not a dict
+        try:
+            graph.graph['node_default'].keys()
+        except KeyError:
+            pass # doesn't exist, no problem
+        except AttributeError:
+            del graph.graph['node_default'] # not a dictionary, remove
+        try:
+            graph.graph['edge_default'].keys()
+        except KeyError:
+            pass # doesn't exist, no problem
+        except AttributeError:
+            del graph.graph['edge_default'] # not a dictionary, remove
+
+
 
         graph = graph.to_undirected()
         graph = nx.MultiGraph(graph)

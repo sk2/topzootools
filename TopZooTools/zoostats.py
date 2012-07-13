@@ -224,14 +224,14 @@ def main():
     # The value depends on the DateType field. Historical and current networks
     # are classified by year. Dynamic networks are kept as dynamic.
     all_dates += [data['NetworkDate'] for data in summary_data.values()
-                  if data['DateType'] == "Historic"]
+                  if data.get('DateType') == "Historic"]
     #all_dates += [data['NetworkDate'] for data in summary_data.values()
     #              if data['DateType'] == "Current"]
     all_dates += ['Current' for data in summary_data.values()
-                  if data['DateType'] == "Current"]
+                  if data.get('DateType') == "Current"]
 
     current_nets = [network for network, data in summary_data.items()
-                  if data['DateType'] == "Current"]
+                  if data.get('DateType') == "Current"]
     #for net in current_nets:
     #    print ("%s %s" % (net, summary_data[net]['DateObtained']))
     # Truncate date from YYYY-MM to just YYYY
@@ -247,7 +247,7 @@ def main():
     #             if len(date) == 7 and date[5] == "-"]
     # Dynamic networks remain as dynamic
     all_dates += ['Dynamic' for data in summary_data.values()
-                  if data['DateType'] == "Dynamic"]
+                  if data.get('DateType') == "Dynamic"]
     #category_counts(all_dates)
    
     """

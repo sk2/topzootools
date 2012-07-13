@@ -156,10 +156,11 @@ def compare(fileA, fileB):
         added = keysB - keysA
         removed = keysA - keysB
         same = keysA & keysB
-        print "same keys", same
 #TODO: better handling of multi edges here
         modified = [key for key in same if dataA[key] != dataB[key] and key != 'id']
-        print "modified keys", modified
+        if len(modified):
+            print "same keys", same
+            print "modified keys", modified
         if len(added) or len(removed) or len(modified):
             #TODO: check handling for multi-edges
             edges_modified.add( (src, dst))
@@ -244,15 +245,14 @@ def compare(fileA, fileB):
                     line_width = 3,
                     node_size = 150,
                     edge_font_size=8,
-                    basemap_resolution_level = 3,
+                    #basemap_resolution_level = 3,
+                    basemap_resolution_level = 1,
                     pdf=True,
                     country_color="#cccccc",
                     user_default_edge_color = "k",
                     )
 
-
 #TODO: handle self-loops - where do they come from???
-
 
 if __name__ == "__main__":
     try:

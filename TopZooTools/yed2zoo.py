@@ -442,8 +442,8 @@ def main():
         #OUTPUT - Write the graphs to files
         #*********************************
 
-        filename = network_label.lower().strip()
-        filename = filename.title()
+        filename = network_label.strip()
+        #filename = filename.title()
         filename = filename.replace(" ", "_")
 
         pattern = re.compile('[\W_]+')

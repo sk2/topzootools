@@ -29,6 +29,8 @@ def main():
     path = options.directory
     network_files = glob.glob(os.path.join(path, "*.gml"))
 
+    graph_as_level = nx.Graph()
+
     pickle_dir = os.path.join(path, "cache")
     if not os.path.isdir(pickle_dir):
         os.mkdir(pickle_dir)
@@ -74,8 +76,7 @@ def main():
             for n in graph:
                 graph.node[n]['asn'] = network_to_asn_mapping[network_name]
         else:
-            print network_name, "not in ASN mapping"
-
+            print "WARNING:", network_name, "not in ASN mapping"
 
         #mapping = dict( (n, nx.utils.misc.generate_unique_node()) for n in graph)
         mapping = {}
@@ -90,9 +91,16 @@ def main():
         nx.relabel_nodes(graph, mapping, copy=False)
         network_prefix = "%s%s" % (network_name, network_delimeter)
         graph_combined = nx.union(graph_combined, graph, rename=("", network_prefix))
+        network_lats = list(d["Latitude"] for n, d in graph.nodes(data=True) if d.get("Latitude"))
+        network_lons = list(d["Longitude"] for n, d in graph.nodes(data=True) if d.get("Longitude"))
+        #network_mean_lat = sum(floatNums) / len(numberList)
+        graph_as_level.add_node(network_name, 
+                label = network_name,
+                Latitude = float(sum(network_lats) / len(network_lats)),
+                Longitude =  float(sum(network_lons) / len(network_lons)),
+                )
 
 #TODO: look at renaming with labels, eg geant_at, this will simplify the connection process!
-
 #pprint.pprint(sorted(graph_combined.nodes()))
 
     print "Stitched networks:", ", ".join(stitched_networks)
@@ -153,16 +161,20 @@ def main():
         print "Connecting", node_label_a, "in", network_a, "to", node_label_b, "in", network_b
         graph_combined.add_edge(node_id_a, node_id_b, edge_color='r')
 # print edges
+# work out mean lat and lon
+
+        graph_as_level.add_edge(network_a, network_b)
 
     disconnected_nodes = [ n for n in graph_combined if graph_combined.degree(n) == 0]
     print "Removing disconnected nodes:", ", ".join(disconnected_nodes)
     graph_combined.remove_nodes_from(disconnected_nodes)
 
-
 #pprint.pprint(graph_combined.nodes())
     print "Saving as single-edge graph"
     graph_combined = nx.Graph(graph_combined) #single edge for now
     nx.write_graphml(graph_combined, os.path.join(output_dir, "graph_combined.graphml"))
+    nx.write_graphml(graph_as_level, os.path.join(output_dir, "graph_as_level.graphml"))
+    nx.write_gml(graph_as_level, os.path.join(output_dir, "graph_as_level.gml"))
 # Reset id attribute, as write_gml uses this as node id -> collides, reduced node count
     for n in graph_combined:
         del graph_combined.node[n]['id']

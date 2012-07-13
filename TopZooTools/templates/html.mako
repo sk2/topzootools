@@ -136,12 +136,13 @@
 		</tbody>           
 	</table>              
 
+    Network maps can be accessed by clicking a network's name. Not all networks have a map: only those for which a sufficient number of nodes can be geocoded.
+
                 
 	<% net_count = len(summary_data)%>
 	${net_count} Networks
 	<br>
 	Updated ${date}           
-	
 	
 	 	Sorting by <a href="http://tablesorter.com/">tablesorter</a> 
 	   
@@ -151,7 +152,7 @@
 <div id="footer">
 	This project was supported by the Australian Government through an Australian Postgraduate Award and Australian Research Council Discovery Grants DP110103505 and DP0985063; and by the <a href="http://www.adelaide.edu.au">University of Adelaide</a>.
 	<br>
-	Last updated 2011-02-19 by simon.knight at adelaide.edu.au </a>.
+	Last updated 2012-07-13 by simon.knight at adelaide.edu.au </a>.
 </div>
 </body>
 </html>

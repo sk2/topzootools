@@ -1133,7 +1133,7 @@ def main():
         #OUTPUT - Write the graphs to files
         #*********************************
 
-        filename = network_label.lower().strip()
+        filename = network_label.title().strip()
         filename = filename.title()
         filename = filename.replace(" ", "_")
 
