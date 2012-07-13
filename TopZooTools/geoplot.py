@@ -823,7 +823,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                 #       + " " + G.node[dst]['label'])
                 m.drawgreatcircle(lon1, lat1, lon2, lat2, color = edge_color,
                                   linewidth=curr_line_width,
-                                  alpha = 0.8,
+                                  #alpha = 0.8,
                                   linestyle = linestyle,
                                   #dashes=(4,1),
                                   zorder=zorder)
@@ -1004,15 +1004,7 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                     zorder = delta_zorders[''],
                     node_color = node_color)
 
-# modified
-            plotted_nodes = nx.draw_networkx_nodes(G, pos, 
-                    nodelist = [n for n, d in node_deltas.items() if d == "modified"],
-                    node_size = node_size, 
-                    #alpha = 0.8, 
-                    linewidths = (0,0),
-                    node_shape = 's',
-                    zorder = delta_zorders['modified'],
-                    node_color = delta_colors['modified'])
+
 
 # added
             plotted_nodes = nx.draw_networkx_nodes(G, pos, 
@@ -1034,6 +1026,16 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
                     node_shape = '^',
                     node_color = delta_colors['removed'])
 
+            # modified
+            plotted_nodes = nx.draw_networkx_nodes(G, pos, 
+                    nodelist = [n for n, d in node_deltas.items() if d == "modified"],
+                    node_size = node_size, 
+                    #alpha = 0.8, 
+                    linewidths = (0,0),
+                    node_shape = 's',
+                    zorder = delta_zorders['modified'],
+                    node_color = delta_colors['modified'])
+
         else:
             plotted_nodes = nx.draw_networkx_nodes(G, pos, 
                     nodelist = geocoded_cities,
@@ -1044,27 +1046,27 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
 
 
 
-        nx.draw_networkx_nodes(G, pos, nodelist = hyperedge_nodes,
+            nx.draw_networkx_nodes(G, pos, nodelist = hyperedge_nodes,
+                                    node_size = node_size, 
+                                    #alpha = 0.8, 
+                                    linewidths = (0,0),
+                                    node_color = node_color,
+                                    node_shape='d',) 
+
+            if external_node_scale:
+                nx.draw_networkx_nodes(G, pos, nodelist = external_nodes,
+                                    node_size = node_size, 
+                                    #alpha = 0.8, 
+                                    linewidths = (0,0),
+                                    node_color = 'r',
+                                    node_shape='^',) 
+
+            nx.draw_networkx_nodes(G, pos, nodelist = inferred_nodes,
                                 node_size = node_size, 
                                 #alpha = 0.8, 
                                 linewidths = (0,0),
                                 node_color = node_color,
-                                node_shape='d',) 
-
-        if external_node_scale:
-            nx.draw_networkx_nodes(G, pos, nodelist = external_nodes,
-                                node_size = node_size, 
-                                #alpha = 0.8, 
-                                linewidths = (0,0),
-                                node_color = 'r',
-                                node_shape='^',) 
-
-        nx.draw_networkx_nodes(G, pos, nodelist = inferred_nodes,
-                            node_size = node_size, 
-                            #alpha = 0.8, 
-                            linewidths = (0,0),
-                            node_color = node_color,
-                            node_shape='s')  
+                                node_shape='s')  
 
     if use_labels:
         if False and 'Network' in G.graph and G.graph['Network'] == 'GEANT':
