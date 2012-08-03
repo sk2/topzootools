@@ -111,8 +111,6 @@ def compare(fileA, fileB):
             labels_modified.add(label)
     print "Nodes modified:", ", ".join(sorted(labels_modified))
 
-# need common nodes for edge comparisons
-
 #TODO: need to look at node properties
     
 # relabel graphs with labels for comparisons
@@ -125,6 +123,17 @@ def compare(fileA, fileB):
 # can't do sets, as they hash differently, (a,b) hashes different to (b,a)
     edges_removed = set( (s,t) for (s,t) in graphA_reduced.edges() if not graphB_reduced.has_edge(s,t))
     edges_added = set( (s,t) for (s,t) in graphB_reduced.edges() if not graphA_reduced.has_edge(s,t))
+
+# add in edges from added nodes
+    for node in nodes_added:
+        for s, t in graphB.edges(node):
+            edges_added.add((graphB.node[s]['label'], graphB.node[t]['label']))
+# try and remove if exists in opposite direction
+
+    for node in nodes_removed:
+        for s, t in graphA.edges(node):
+            edges_removed.add((graphA.node[s]['label'], graphA.node[t]['label']))
+
     edges_common = set( (s,t) for (s,t) in graphA_reduced.edges() if graphB_reduced.has_edge(s,t))
     if edges_added:
         print "Edges added:", ", ".join(sorted("(%s, %s)" % (s,t) for s,t in edges_added))
@@ -191,13 +200,13 @@ def compare(fileA, fileB):
             delta = "modified"
         composed.node[n]['delta'] = delta
 
-    for src, dst in composed.edges():
+    for src, dst in sorted(composed.edges()):
         delta = ""
-        if (src, dst) in edges_added:
+        if (src, dst) in edges_added or (dst, src) in edges_added:
             delta = "added"
-        elif (src, dst) in edges_removed:
+        elif (src, dst) in edges_removed or (dst, src) in edges_removed:
             delta = "removed"
-        elif (src, dst) in edges_modified:
+        elif (src, dst) in edges_modified or (dst, src) in edges_modified:
             delta = "modified"
         composed[src][dst]['delta'] = delta
 #TODO: make this refer to the source graph metadata/filename

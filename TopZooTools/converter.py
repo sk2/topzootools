@@ -236,8 +236,8 @@ def main():
                    help="Write Graphml Format")
     opt.add_option('--dot', action="store_true", default=False, 
                    help="Write GraphViz dot Format")
-    opt.add_option('--gexf', action="store_true", default=False,
-                   help="Write GEXF Format")
+    opt.add_option('--gexf', action="store_true", default=False, help="Write GEXF Format")
+    opt.add_option('--json', action="store_true", default=False, help="Write JSON Format")
     opt.add_option('--plot', action="store_true", default=False,
                    help="Plot graph")
     opt.add_option('--gallery', action="store_true", default=False,
@@ -441,7 +441,7 @@ def main():
 
         if options.matlab:
             # Write as a sparse matrix
-            mat_file =  out_file + ".mat"
+            mat_file =  out_file + ".mat" #TODO: check file names here
             mat_fh = open(out_file + ".txt", "w")
             if options.archive:
                 archive_filelist.append(mat_file)
@@ -456,6 +456,17 @@ def main():
                 mat_fh.write( " ".join(line) )
                 mat_fh.write("\n")
             mat_fh.close()
+
+        if options.json:
+# do last as need to remove "id" key
+            from networkx.readwrite import json_graph
+# JSON writer doesn't handle 'id' already present in nodes
+            for n in graph:
+                del graph.node[n]['id']
+
+            json_file =  out_file + ".json" 
+            with open( json_file, 'wb') as json_fh:
+                json_fh.write(json_graph.dumps(graph))
 
     if options.matlab_keys:
         matlab_keys(summary_data, output_path, options.counts_only)

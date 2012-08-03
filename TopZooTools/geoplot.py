@@ -734,8 +734,8 @@ def plot_graph(G, output_path, title=False, use_bluemarble=False,
     else:
         delta_colors = { 'added': '#339966', 'removed': 'r', 'modified': '#3366ff', 
                 '': default_edge_color} # used default color if no delta
-        delta_styles = { 'added': 'dashed', 'removed': 'dotted', 'modified': 'dashdot', '': 'solid'}
-        #delta_styles = { 'added': 'solid', 'removed': 'solid', 'modified': 'solid', '': 'solid'} # used default color if no delta
+        #delta_styles = { 'added': 'dashed', 'removed': 'dotted', 'modified': 'dashdot', '': 'solid'}
+        delta_styles = { 'added': 'solid', 'removed': 'solid', 'modified': 'solid', '': 'solid'} # used default color if no delta
 
         for src, dst, data in G.edges(data=True):
             if False and 'Network' in G.graph and G.graph['Network'] == 'GEANT':
