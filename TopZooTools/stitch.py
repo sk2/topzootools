@@ -12,10 +12,10 @@ import optparse
 
 opt = optparse.OptionParser()
 
-opt.add_option('--directory', '-d',
+opt.add_option('--directory', '-d', 
             help="Directory containing .gml files to join")
 
-opt.add_option('--csv', '-c',
+opt.add_option('--csv', '-c', 
             help="CSV file of interconnects for stitching")
 
 opt.add_option('--asn', '-a',
@@ -24,6 +24,20 @@ opt.add_option('--asn', '-a',
 #TODO: include example CSV formats
 
 options = opt.parse_args()[0]
+
+valid_params = True
+if not options.directory:
+    print "Please specify a directory with -d"
+    valid_params = False
+if not options.directory:
+    print "Please specify an ASN CSV file with -a"
+    valid_params = False
+if not options.directory:
+    print "Please specify an interconnect CSV file with -c"
+    valid_params = False
+
+if not valid_params:
+    raise SystemExit
 
 def main():
     path = options.directory
@@ -51,6 +65,10 @@ def main():
         network, asn = line
         network_to_asn_mapping[network] = asn
 
+    #NOTE: won't use networks already seen, eg time series: uses first
+    #TODO: could sort to use most recent in filenames (if non-numeric is identical)
+    seen_networks = set()
+
     for source_file in sorted(network_files):
         # Extract name of network from file path
         filename = os.path.split(source_file)[1]
@@ -71,6 +89,11 @@ def main():
                 if 'Internal' in d and d['Internal'] == 0)
 
         network_name = graph.graph['Network']
+        if network_name in seen_networks:
+            print "Skipping repeated network", network_name
+            continue
+
+        seen_networks.add(network_name)
         stitched_networks.append(network_name)
         if network_name in network_to_asn_mapping:
             for n in graph:
@@ -94,10 +117,17 @@ def main():
         network_lats = list(d["Latitude"] for n, d in graph.nodes(data=True) if d.get("Latitude"))
         network_lons = list(d["Longitude"] for n, d in graph.nodes(data=True) if d.get("Longitude"))
         #network_mean_lat = sum(floatNums) / len(numberList)
+        latitude = longitude = 0
+        try:
+            latitude = float(sum(network_lats) / len(network_lats))
+            longitude =  float(sum(network_lons) / len(network_lons))
+        except ZeroDivisionError:
+            pass
+
         graph_as_level.add_node(network_name, 
                 label = network_name,
-                Latitude = float(sum(network_lats) / len(network_lats)),
-                Longitude =  float(sum(network_lons) / len(network_lons)),
+                Latitude = latitude,
+                Longitude = longitude,
                 )
 
 #TODO: look at renaming with labels, eg geant_at, this will simplify the connection process!
@@ -169,15 +199,25 @@ def main():
     print "Removing disconnected nodes:", ", ".join(disconnected_nodes)
     graph_combined.remove_nodes_from(disconnected_nodes)
 
-#pprint.pprint(graph_combined.nodes())
-    print "Saving as single-edge graph"
+    graph_combined.graph['name'] = "Combined"
+
     graph_combined = nx.Graph(graph_combined) #single edge for now
+
     nx.write_graphml(graph_combined, os.path.join(output_dir, "graph_combined.graphml"))
     nx.write_graphml(graph_as_level, os.path.join(output_dir, "graph_as_level.graphml"))
     nx.write_gml(graph_as_level, os.path.join(output_dir, "graph_as_level.gml"))
 # Reset id attribute, as write_gml uses this as node id -> collides, reduced node count
     for n in graph_combined:
-        del graph_combined.node[n]['id']
+        try:
+            del graph_combined.node[n]['id']
+        except KeyError:
+            pass
+
+
+    from networkx.readwrite import json_graph
+    data =  json_graph.node_link_data(graph)
+
+
     nx.write_gml(graph_combined, os.path.join(output_dir, "graph_combined.gml"))
 
 if __name__ == "__main__":
